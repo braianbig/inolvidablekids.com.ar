@@ -263,7 +263,7 @@ export default function Home() {
             <span><CloudRain /> Reprogramación por lluvia</span>
           </div>
           <div className="payment-teaser">
-            <div className="payment-heading"><CreditCard /><strong>Métodos de pago</strong></div>
+            <div className="payment-heading"><CreditCard /><strong>Métodos De Pago</strong></div>
             <span>Transferencia Bancaria · Mercado Pago · Tarjeta de Débito</span>
           </div>
         </div>
@@ -338,7 +338,6 @@ export default function Home() {
 
           <fieldset className="choice-section payment-section">
             <legend><CreditCard /> Medio de pago preferido</legend>
-            <p className="payment-only-note">Transferencia Bancaria, Mercado Pago o Tarjeta de Débito.</p>
             <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod} className="payment-options" aria-label="Medio de pago">
               {paymentMethods.map((method) => (
                 <label key={method} className={`payment-option ${paymentMethod === method ? "selected" : ""}`}>
@@ -434,7 +433,6 @@ export default function Home() {
           <AccordionItem value="pagos"><AccordionTrigger>¿Cómo puedo pagar?</AccordionTrigger><AccordionContent>Aceptamos Transferencia Bancaria, Mercado Pago y Tarjeta de Débito. La fecha se confirma con una reservación del 50%.</AccordionContent></AccordionItem>
           <AccordionItem value="armado"><AccordionTrigger>¿Cuánto tarda el armado?</AccordionTrigger><AccordionContent>Depende del combo y del acceso al lugar. Coordinamos la llegada con anticipación para dejar todo listo antes del festejo.</AccordionContent></AccordionItem>
           <AccordionItem value="precio"><AccordionTrigger>¿Qué incluye el precio base?</AccordionTrigger><AccordionContent>Incluye 3 horas, traslado dentro de Colonia Alberdi, instalación, prueba de los equipos y retiro coordinado.</AccordionContent></AccordionItem>
-          <AccordionItem value="ahorro"><AccordionTrigger>¿Cómo se calcula el ahorro por horas extras?</AccordionTrigger><AccordionContent>El selector actualiza el total automáticamente: con 4 horas ahorrás $8.000 y con 5 horas ahorrás $10.000.</AccordionContent></AccordionItem>
         </Accordion>
       </section>
 
@@ -449,9 +447,9 @@ export default function Home() {
           <div className="footer-links"><a href="#fechas">Fechas disponibles</a><a href="#combos">Combos</a><a href="#seguridad">Seguridad</a><a href="#preguntas">Preguntas frecuentes</a></div>
         </div>
         <div className="fiscal-section">
-          <a href="https://qr.afip.gob.ar/?qr=dtFKsQDLajD3yE-P0kGaEg,," target="_F960AFIPInfo" rel="noreferrer" className="fiscal-link">
+          <a href="https://qr.afip.gob.ar/?qr=CCmIBpS5hK1gtpBgoJX9ZA,," target="_F960AFIPInfo" rel="noreferrer" className="fiscal-link">
             <img src="https://www.afip.gob.ar/images/f960/DATAWEB.jpg" alt="Formulario 960/D - Data Fiscal" />
-            <span><strong>Comercio Registrado</strong><small>Consultá nuestra Data Fiscal en ARCA</small></span>
+            <span><strong>Comercio Registrado</strong><small>Data Fiscal En ARCA</small></span>
           </a>
         </div>
         <div className="social-section">

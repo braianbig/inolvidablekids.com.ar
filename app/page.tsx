@@ -16,8 +16,8 @@ const ALBERDI_CENTER: [number, number] = [-27.36032, -55.2324];
 
 const gameImages: Record<string, { src: string; alt: string }> = {
   pelotero: { src: "/juego-pelotero-cutout.png", alt: "Pelotero inflable multicolor" },
-  metegol: { src: "/juego-metegol.webp", alt: "Metegol de tamaño completo" },
-  cama: { src: "/juego-cama-elastica.webp", alt: "Cama elástica con red de seguridad" },
+  metegol: { src: "/juego-metegol-estadio-cutout.png", alt: "Metegol Estadio de tamaño completo" },
+  cama: { src: "/juego-cama-elastica-cutout.png", alt: "Cama elástica Gadnic con red de seguridad" },
 };
 
 const combos = [

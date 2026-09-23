@@ -15,9 +15,9 @@ const PLAIN_WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
 const ALBERDI_CENTER: [number, number] = [-27.36032, -55.2324];
 
 const gameImages: Record<string, { src: string; alt: string }> = {
-  pelotero: { src: "/juego-pelotero-cutout.png", alt: "Pelotero inflable multicolor" },
-  metegol: { src: "/juego-metegol-estadio-cutout.png", alt: "Metegol Estadio de tamaño completo" },
-  cama: { src: "/juego-cama-elastica-cutout.png", alt: "Cama elástica Gadnic con red de seguridad" },
+  pelotero: { src: "/juego-pelotero-completo.webp", alt: "Pelotero inflable multicolor" },
+  metegol: { src: "/juego-metegol-estadio-completo.webp", alt: "Metegol Estadio de tamaño completo" },
+  cama: { src: "/juego-cama-elastica-completa.webp", alt: "Cama elástica Gadnic con red de seguridad" },
 };
 
 const combos = [
@@ -382,21 +382,21 @@ export default function Home() {
         </div>
         <div className="equipment-grid">
           <article className="equipment-card">
-            <div className="equipment-media"><img className="equipment-corner-brand brand-fabrica" src="/marca-fabrica-inflables.png" alt="La Fábrica de Inflables" /><img className="equipment-product" src="/juego-pelotero-cutout.png" alt="Pelotero inflable multicolor con entrada y tobogán" /></div>
+            <div className="equipment-media"><img className="equipment-corner-brand brand-fabrica" src="/marca-fabrica-inflables.png" alt="La Fábrica de Inflables" /><img className="equipment-product" src="/juego-pelotero-completo.webp" alt="Pelotero inflable multicolor con entrada y tobogán" /></div>
             <div className="equipment-copy">
               <h3>Juego, saltos y tobogán</h3><p>Inflable 3x4 metros con rampa.</p>
               <ul className="equipment-features"><li>Rampa lateral para deslizarse</li><li>Amplia zona de saltos y juego</li><li>Ideal para cumpleaños infantiles</li></ul>
             </div>
           </article>
           <article className="equipment-card">
-            <div className="equipment-media"><img className="equipment-corner-brand brand-gadnic" src="/marca-gadnic.png" alt="Gadnic" /><img className="equipment-product" src="/juego-cama-elastica-cutout.png" alt="Cama elástica Gadnic azul con red protectora" /></div>
+            <div className="equipment-media"><img className="equipment-corner-brand brand-gadnic" src="/marca-gadnic.png" alt="Gadnic" /><img className="equipment-product" src="/juego-cama-elastica-completa.webp" alt="Cama elástica Gadnic azul con red protectora" /></div>
             <div className="equipment-copy">
               <h3>Cama Elástica Gadnic</h3><p>Salto uniforme y cómodo.</p>
               <ul className="equipment-features"><li>Red de protección en todo el contorno</li><li>Superficie amplia para saltar</li><li>Uso infantil con supervisión adulta</li></ul>
             </div>
           </article>
           <article className="equipment-card equipment-card-estadio">
-            <div className="equipment-media"><img className="equipment-corner-brand brand-estadio" src="/marca-estadio.png" alt="Estadio" /><img className="equipment-product" src="/juego-metegol-estadio-cutout.png" alt="Metegol Estadio con jugadores de Argentina y Brasil" /></div>
+            <div className="equipment-media"><img className="equipment-corner-brand brand-estadio" src="/marca-estadio.png" alt="Estadio" /><img className="equipment-product" src="/juego-metegol-estadio-completo.webp" alt="Metegol Estadio con jugadores de Argentina y Brasil" /></div>
             <div className="equipment-copy">
               <h3>Metegol Estadio Profesional</h3><p>Diversión para chicos y grandes.</p>
               <ul className="equipment-features"><li>Tamaño profesional para jugar cómodos</li><li>Jugadores de Argentina y Brasil</li><li>Diversión para chicos y grandes</li></ul>

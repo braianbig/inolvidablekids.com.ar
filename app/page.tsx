@@ -447,7 +447,7 @@ export default function Home() {
           <div className="footer-links"><a href="#fechas">Fechas disponibles</a><a href="#combos">Combos</a><a href="#seguridad">Seguridad</a><a href="#preguntas">Preguntas frecuentes</a></div>
         </div>
         <div className="fiscal-section">
-          <a href="https://qr.afip.gob.ar/?qr=CCmIBpS5hK1gtpBgoJX9ZA,," target="_F960AFIPInfo" rel="noreferrer" className="fiscal-link">
+          <a href="http://qr.afip.gob.ar/?qr=CCmIBpS5hK1gtpBgoJX9ZA,," target="_F960AFIPInfo" rel="noreferrer" className="fiscal-link">
             <img src="https://www.afip.gob.ar/images/f960/DATAWEB.jpg" alt="Formulario 960/D - Data Fiscal" />
             <span><strong>Comercio Registrado</strong><small>Data Fiscal En ARCA</small></span>
           </a>

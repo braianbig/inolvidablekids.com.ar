@@ -10,8 +10,8 @@ export const metadata: Metadata = {
     email: false,
   },
   icons: {
-    icon: "/favicon-brand.png",
-    shortcut: "/favicon-brand.png",
+    icon: "/favicon-brand.svg",
+    shortcut: "/favicon-brand.svg",
   },
 };
 

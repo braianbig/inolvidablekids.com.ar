@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Inolvidable Kids | Juegos para cumpleaños en Colonia Alberdi",
-  description: "Alquiler de pelotero, metegol y cama elástica para cumpleaños en Colonia Alberdi, General Alvear, Oberá y alrededores.",
+  title: "Inolvidable Kids",
+  description: "¡Alquiler de peloteros, metegoles y camas elásticas para cumpleaños en tu casa o donde quieras!",
   formatDetection: {
     telephone: false,
     address: false,

@@ -3,6 +3,14 @@
 @import "../vendor/shadcn-tailwind-4.13.0.css";
 @import "leaflet/dist/leaflet.css";
 
+@font-face {
+  font-family: "Nunito";
+  src: url("/fonts/Nunito-variable.woff") format("woff");
+  font-style: normal;
+  font-weight: 200 1000;
+  font-display: swap;
+}
+
 :root {
   --background: #f8fbf7; --foreground: #103d32; --card: #ffffff; --card-foreground: #103d32;
   --popover: #ffffff; --popover-foreground: #103d32; --primary: #005a46; --primary-foreground: #ffffff;

@@ -430,8 +430,8 @@ export default function Home() {
           <AccordionItem value="lluvia"><AccordionTrigger>¿Qué pasa si llueve?</AccordionTrigger><AccordionContent>Reprogramamos una vez sin costo, sujeto a disponibilidad. La reservación pasa a la nueva fecha.</AccordionContent></AccordionItem>
           <AccordionItem value="flete"><AccordionTrigger>¿El flete está incluido?</AccordionTrigger><AccordionContent>Sí, dentro de Colonia Alberdi. Para General Alvear, Oberá y alrededores se cotiza según la distancia.</AccordionContent></AccordionItem>
           <AccordionItem value="limpieza"><AccordionTrigger>¿Los juegos se entregan limpios?</AccordionTrigger><AccordionContent>Sí. Los equipos se limpian, revisan y prueban antes de cada evento.</AccordionContent></AccordionItem>
-          <AccordionItem value="pagos"><AccordionTrigger>¿Cómo puedo pagar?</AccordionTrigger><AccordionContent>Aceptamos Transferencia Bancaria, Mercado Pago y Tarjeta de Débito. La fecha se confirma con una reservación del 50%.</AccordionContent></AccordionItem>
-          <AccordionItem value="armado"><AccordionTrigger>¿Cuánto tarda el armado?</AccordionTrigger><AccordionContent>Depende del combo y del acceso al lugar. Coordinamos la llegada con anticipación para dejar todo listo antes del festejo.</AccordionContent></AccordionItem>
+          <AccordionItem value="pagos"><AccordionTrigger>¿Cómo puedo pagar?</AccordionTrigger><AccordionContent>Aceptamos transferencia bancaria, Mercado Pago, tarjeta de débito, tarjeta de crédito y efectivo.</AccordionContent></AccordionItem>
+          <AccordionItem value="armado"><AccordionTrigger>¿Cuánto tarda el armado?</AccordionTrigger><AccordionContent>Depende del combo y del acceso. Coordinamos el armado para dejar todo listo antes del festejo.</AccordionContent></AccordionItem>
           <AccordionItem value="precio"><AccordionTrigger>¿Qué incluye el precio base?</AccordionTrigger><AccordionContent>Incluye 3 horas, traslado dentro de Colonia Alberdi, instalación, prueba de los equipos y retiro coordinado.</AccordionContent></AccordionItem>
         </Accordion>
       </section>

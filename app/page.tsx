@@ -34,7 +34,7 @@ const durationOptions = [
   { hours: 5, extra: 35000, label: "¡Ahorrás $10.000!" },
 ];
 
-const paymentMethods = ["Transferencia Bancaria", "Mercado Pago", "Tarjeta de Débito"];
+const paymentMethods = ["Transferencia Bancaria", "Mercado Pago", "Tarjeta de Débito", "Tarjeta de Crédito", "Efectivo"];
 
 const formatPrice = (value: number) =>
   new Intl.NumberFormat("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 }).format(value);

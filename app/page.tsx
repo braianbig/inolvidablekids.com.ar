@@ -70,7 +70,7 @@ export default function Home() {
   const combo = combos.find((item) => item.id === comboId) ?? combos[0];
   const durationExtra = durationOptions.find((item) => item.hours === durationHours)?.extra ?? 0;
   const priceBenefit = durationHours === 3
-    ? "3 horas incluidas"
+    ? "¡3 horas incluidas!"
     : durationOptions.find((item) => item.hours === durationHours)?.label;
   const total = combo.price + durationExtra;
   const reservationAmount = total / 2;
@@ -348,7 +348,7 @@ export default function Home() {
           </fieldset>
 
           <div className="price-summary">
-            <div className="deposit"><span className="price-label">Reservación 50%<small>{priceBenefit}</small></span><strong>{formatPrice(reservationAmount)}</strong></div>
+            <div className="deposit"><span className="price-label">Reservación 50%</span><small className="price-benefit">{priceBenefit}</small><strong>{formatPrice(reservationAmount)}</strong></div>
           </div>
           <Button asChild size="lg" className={`whatsapp-main ${selectedLocation ? "" : "location-required"}`}><a href={selectedLocation ? whatsappUrl : "#mapa-evento"} target={selectedLocation ? "_blank" : undefined} rel={selectedLocation ? "noreferrer" : undefined}><img src="/social-whatsapp-light.png" alt="" /> {selectedLocation ? "Consultar Disponibilidad" : "Seleccioná la ubicación para consultar"}</a></Button>
           <p className="booking-note"><span>(Traslado gratis en Colonia Alberdi)</span><span>Para otras zonas, el flete se cotiza según la ubicación marcada.</span></p>

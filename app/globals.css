@@ -199,8 +199,10 @@ h1, h2, h3, p { margin-top: 0; }
 .safety-copy h2 { color: white; }
 .safety-copy p { max-width: 600px; color: #c9ddd6; line-height: 1.75; }
 .safety-list { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; margin: 0; padding: 0; list-style: none; align-content: center; }
-.safety-list li { display: flex; align-items: center; gap: 11px; min-height: 64px; padding: 14px 16px; border: 1px solid rgb(255 255 255 / 15%); border-radius: 14px; background: rgb(255 255 255 / 6%); font-weight: 750; }
-.safety-list svg { width: 20px; color: #a9d253; }
+.safety-list li { display: flex; align-items: center; gap: 11px; min-height: 64px; padding: 14px 16px; border: 1px solid rgb(255 255 255 / 15%); border-radius: 14px; background: rgb(255 255 255 / 6%); font-weight: 750; transition: transform .25s ease, border-color .25s ease, background .25s ease, box-shadow .25s ease; }
+.safety-list svg { width: 20px; flex-shrink: 0; color: #a9d253; transition: transform .25s ease; }
+@media (hover: hover) { .safety-list li:hover { transform: translateY(-4px); border-color: rgb(169 210 83 / 50%); background: rgb(255 255 255 / 10%); box-shadow: 0 10px 24px rgb(0 35 27 / 14%); } .safety-list li:hover svg { transform: scale(1.12); } }
+@media (prefers-reduced-motion: reduce) { .safety-list li, .safety-list svg { transition: none; } .safety-list li:hover, .safety-list li:hover svg { transform: none; } }
 .weather-section { display: grid; grid-template-columns: auto 1fr auto; gap: 30px; align-items: center; max-width: 1180px; margin: 0 auto; }
 .weather-section > svg { width: 62px; height: 62px; color: #35a879; stroke-width: 1.4; }
 .weather-section h2 { margin-bottom: 10px; font-size: clamp(1.8rem, 3.4vw, 3.2rem); }

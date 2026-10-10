@@ -30,7 +30,6 @@ export function LegalShell({ title, intro, children }: { title: string; intro: s
         <small>Atención: Lunes a Viernes (8:00hs a 18:00hs). Sábados y Domingos (Cita previa).</small>
         <div className="footer-legal">
           <span>© {new Date().getFullYear()} Inolvidable Kids. Todos los derechos reservados.</span>
-          <span className="footer-love"><span aria-hidden="true">♥</span> Hecho con amor para todos los niños.</span>
         </div>
       </footer>
     </main>

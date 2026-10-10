@@ -348,8 +348,6 @@ footer { padding: 60px max(5vw, 24px) 28px; background: #eff6f2; color: #55736a;
 .legal-success p { line-height: 1.55; }
 .legal-footer { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 38px 20px; background: transparent; color: #55736a; font-size: .78rem; text-align: center; }
 .legal-footer nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px 24px; color: #005a46; font-weight: 800; }
-.legal-footer small { font-size: .76rem; }
-.legal-hours { display: grid; gap: 3px; text-align: center; }
 @media (max-width: 700px) {
   .legal-header { min-height: 66px; padding: 8px 16px; }
   .legal-hero { min-height: 245px; padding: 52px 18px 70px; }
@@ -369,5 +367,4 @@ footer { padding: 60px max(5vw, 24px) 28px; background: #eff6f2; color: #55736a;
   .footer-links a, .footer-policy-links a { display: grid; min-height: 38px; place-items: center; padding: 7px 2px; }
   .social-section > strong { font-size: .74rem; }
   .legal-footer nav { gap: 8px 14px; font-size: .68rem; }
-  .legal-footer .legal-hours { font-size: .7rem; }
 }

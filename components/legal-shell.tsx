@@ -27,7 +27,6 @@ export function LegalShell({ title, intro, children }: { title: string; intro: s
       <div className="legal-content">{children}</div>
       <footer className="legal-footer">
         <nav aria-label="Información legal">{links.map(link => <a key={link.href} href={link.href}>{link.label}</a>)}</nav>
-        <small className="legal-hours"><span>Atención: Lunes a viernes, de 8:00 a 18:00 horas</span><span>Sábados y domingos, cita previa</span></small>
         <div className="footer-legal">
           <span>© {new Date().getFullYear()} Inolvidable Kids. Todos los derechos reservados.</span>
         </div>

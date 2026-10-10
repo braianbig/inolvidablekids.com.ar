@@ -348,6 +348,7 @@ export default function Home() {
           </fieldset>
 
           <div className="price-summary">
+            <div className="estimated-total"><span>Total Estimado</span><strong>{formatPrice(total)}</strong></div>
             <div className="deposit"><span className="price-label">Reservación 50%</span><small className={`price-benefit ${durationHours === 3 ? "included" : ""}`}>{priceBenefit}</small><strong>{formatPrice(reservationAmount)}</strong></div>
           </div>
           <Button asChild size="lg" className={`whatsapp-main ${selectedLocation ? "" : "location-required"}`}><a href={selectedLocation ? whatsappUrl : "#mapa-evento"} target={selectedLocation ? "_blank" : undefined} rel={selectedLocation ? "noreferrer" : undefined}><img src="/social-whatsapp-light.png" alt="" /> {selectedLocation ? "Consultar Disponibilidad" : "Seleccioná la ubicación para consultar"}</a></Button>

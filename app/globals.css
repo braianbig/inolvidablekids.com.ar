@@ -153,11 +153,11 @@ h1, h2, h3, p { margin-top: 0; }
 .payment-option > span { display: flex; min-width: 0; flex-direction: column; line-height: 1.2; }
 .payment-option strong { font-size: .82rem; white-space: nowrap; }
 .payment-option small { margin-top: 3px; color: #6c847b; font-size: .65rem; font-weight: 850; }
-.price-summary { margin: 18px 0 14px; }
+.price-summary { display: grid; gap: 10px; margin: 18px 0 14px; }
 .price-summary > div { display: flex; align-items: center; justify-content: space-between; }
 .price-summary span { color: #688078; font-size: .82rem; }
 .price-summary strong { color: #005a46; font-size: 1.3rem; }
-.price-summary .deposit { display: flex; align-items: center; justify-content: flex-start; gap: 8px; }
+.price-summary .deposit { display: flex; align-items: center; justify-content: flex-start; gap: 8px; padding-top: 10px; border-top: 1px solid #cbdad2; }
 .price-summary .price-label { white-space: nowrap; }
 .price-summary .price-benefit { padding: 3px 7px; border-radius: 999px; background: #a9d253; color: #173f35; font-size: .7rem; font-weight: 950; line-height: 1.2; box-shadow: 0 4px 12px rgb(90 126 22 / 18%); white-space: nowrap; }
 .price-summary .price-benefit.included { font-size: .65rem; }

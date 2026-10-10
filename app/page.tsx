@@ -240,6 +240,8 @@ export default function Home() {
         <nav className="desktop-nav" aria-label="Navegación principal">
           <a href="#combos">Combos</a><a href="#fechas">Fechas</a>
           <a href="#seguridad">Seguridad</a><a href="#preguntas">Preguntas</a>
+          <a href="/arrepentimiento">Botón de arrepentimiento</a>
+          <a href="/baja-de-servicio">Botón de baja de servicio</a>
         </nav>
         <Button asChild className="header-cta">
           <a href={PLAIN_WHATSAPP_URL} target="_blank" rel="noreferrer"><img src="/social-whatsapp-light.png" alt="" /> <span>WhatsApp</span></a>
@@ -452,6 +454,12 @@ export default function Home() {
             <span><strong>Comercio Registrado</strong><small>Data Fiscal En ARCA</small></span>
           </a>
         </div>
+        <nav className="footer-policy-links" aria-label="Información legal">
+          <a href="/terminos-y-condiciones">Términos y condiciones</a>
+          <a href="/politica-de-privacidad">Política de privacidad</a>
+          <a href="/arrepentimiento">Botón de arrepentimiento</a>
+          <a href="/baja-de-servicio">Botón de baja de servicio</a>
+        </nav>
         <div className="social-section">
           <strong>¡Síguenos en nuestras redes sociales!</strong>
           <div className="social-links">

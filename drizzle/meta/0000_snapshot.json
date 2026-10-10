@@ -1,0 +1,93 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "df742e76-4ffb-442d-bb78-ffba933ecbd3",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "legal_requests": {
+      "name": "legal_requests",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "code": {
+          "name": "code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "type": {
+          "name": "type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "contact": {
+          "name": "contact",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "booking_reference": {
+          "name": "booking_reference",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "message": {
+          "name": "message",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "legal_requests_code_unique": {
+          "name": "legal_requests_code_unique",
+          "columns": [
+            "code"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}

@@ -43,8 +43,8 @@ export function LegalRequestForm({ type }: { type: "arrepentimiento" | "baja" })
     <form className="legal-form" onSubmit={submit}>
       <label>Nombre y apellido <input name="name" autoComplete="name" maxLength={120} required /></label>
       <label>Correo electrónico o teléfono para responderte <input name="contact" maxLength={180} required /></label>
-      <label>Fecha del evento o referencia de la reserva <span>(si la tenés)</span><input name="bookingReference" maxLength={120} /></label>
-      <label>Comentario <span>(opcional)</span><textarea name="message" rows={4} maxLength={1000} /></label>
+      <label>Fecha del evento o referencia de la reserva<input name="bookingReference" maxLength={120} /></label>
+      <label>Comentario<textarea name="message" rows={4} maxLength={1000} /></label>
       <p>No necesitás crear una cuenta ni explicar el motivo para enviar tu solicitud.</p>
       {error && <p className="legal-error" role="alert">{error} También podés escribir a <a href="mailto:inolvidablekids@gmail.com">inolvidablekids@gmail.com</a>.</p>}
       <button type="submit" disabled={pending}>{pending ? "Enviando…" : "Enviar solicitud"}</button>

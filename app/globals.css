@@ -161,9 +161,9 @@ h1, h2, h3, p { margin-top: 0; }
 .price-summary .price-label { white-space: nowrap; }
 .price-summary .price-benefit { padding: 3px 7px; border-radius: 999px; background: #a9d253; color: #173f35; font-size: .7rem; font-weight: 950; line-height: 1.2; box-shadow: 0 4px 12px rgb(90 126 22 / 18%); white-space: nowrap; }
 .price-summary .price-benefit.included { font-size: .65rem; }
-.price-summary .deposit strong { margin-left: auto; font-size: 1.12rem; white-space: nowrap; }
-@media (max-width: 380px) { .price-summary .deposit { gap: 4px; } .price-summary .price-label { font-size: .7rem; } .price-summary .price-benefit { padding-inline: 5px; font-size: .63rem; } .price-summary .price-benefit.included { font-size: .6rem; } .price-summary .deposit strong { font-size: .95rem; } }
-@media (max-width: 340px) { .price-summary .price-label { font-size: .64rem; } .price-summary .price-benefit { font-size: .59rem; } .price-summary .price-benefit.included { font-size: .56rem; } .price-summary .deposit strong { font-size: .88rem; } }
+.price-summary .deposit strong, .price-summary .estimated-total strong { margin-left: auto; font-size: 1.12rem; white-space: nowrap; }
+@media (max-width: 380px) { .price-summary .deposit { gap: 4px; } .price-summary .price-label { font-size: .7rem; } .price-summary .price-benefit { padding-inline: 5px; font-size: .63rem; } .price-summary .price-benefit.included { font-size: .6rem; } .price-summary .deposit strong, .price-summary .estimated-total strong { font-size: .95rem; } }
+@media (max-width: 340px) { .price-summary .price-label { font-size: .64rem; } .price-summary .price-benefit { font-size: .59rem; } .price-summary .price-benefit.included { font-size: .56rem; } .price-summary .deposit strong, .price-summary .estimated-total strong { font-size: .88rem; } }
 .whatsapp-main { width: 100%; min-height: 54px; border-radius: 15px; background: #005a46; color: #a9d253; font-size: .96rem; font-weight: 900; }
 .whatsapp-main:hover { background: #0b7059; color: #b9df6b; }
 .whatsapp-main.location-required { background: #5f756e; color: #dbe7e2; }

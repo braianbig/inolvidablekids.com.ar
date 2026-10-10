@@ -248,7 +248,7 @@ export default function Home() {
 
       <section className="hero" id="inicio">
         <div className="hero-copy">
-          <div className="location-pill" data-detector-ignore="true"><MapPin /> Colonia Alberdi, General Alvear, Oberá y alrededores</div>
+          <div className="location-pill" data-detector-ignore="true"><MapPin /> Colonia Alberdi, General Alvear y Oberá</div>
           <h1>
             <span>Llevamos la diversión</span>
             <span>para recuerdos inolvidables</span>

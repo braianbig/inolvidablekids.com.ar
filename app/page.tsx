@@ -238,10 +238,8 @@ export default function Home() {
           <span className="brand-kids">KIDS</span>
         </a>
         <nav className="desktop-nav" aria-label="Navegación principal">
-          <a href="#combos">Combos</a><a href="#fechas">Fechas</a>
+          <a href="#combos">Combos</a><a href="/arrepentimiento">Botón de arrepentimiento</a><a href="#fechas">Fechas</a>
           <a href="#seguridad">Seguridad</a><a href="#preguntas">Preguntas</a>
-          <a href="/arrepentimiento">Botón de arrepentimiento</a>
-          <a href="/baja-de-servicio">Botón de baja de servicio</a>
         </nav>
         <Button asChild className="header-cta">
           <a href={PLAIN_WHATSAPP_URL} target="_blank" rel="noreferrer"><img src="/social-whatsapp-light.png" alt="" /> <span>WhatsApp</span></a>
@@ -447,6 +445,12 @@ export default function Home() {
       <footer>
         <div className="footer-main">
           <div className="footer-links"><a href="#fechas">Fechas disponibles</a><a href="#combos">Combos</a><a href="#seguridad">Seguridad</a><a href="#preguntas">Preguntas frecuentes</a></div>
+          <nav className="footer-policy-links" aria-label="Información legal">
+            <a href="/terminos-y-condiciones">Términos y condiciones</a>
+            <a href="/politica-de-privacidad">Política de privacidad</a>
+            <a href="/arrepentimiento">Botón de arrepentimiento</a>
+            <a href="/baja-de-servicio">Botón de baja de servicio</a>
+          </nav>
         </div>
         <div className="fiscal-section">
           <a href="http://qr.afip.gob.ar/?qr=CCmIBpS5hK1gtpBgoJX9ZA,," target="_F960AFIPInfo" rel="noreferrer" className="fiscal-link">
@@ -454,12 +458,6 @@ export default function Home() {
             <span><strong>Comercio Registrado</strong><small>Data Fiscal En ARCA</small></span>
           </a>
         </div>
-        <nav className="footer-policy-links" aria-label="Información legal">
-          <a href="/terminos-y-condiciones">Términos y condiciones</a>
-          <a href="/politica-de-privacidad">Política de privacidad</a>
-          <a href="/arrepentimiento">Botón de arrepentimiento</a>
-          <a href="/baja-de-servicio">Botón de baja de servicio</a>
-        </nav>
         <div className="social-section">
           <strong>¡Síguenos en nuestras redes sociales!</strong>
           <div className="social-links">

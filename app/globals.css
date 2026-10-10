@@ -153,14 +153,14 @@ h1, h2, h3, p { margin-top: 0; }
 .payment-option > span { display: flex; min-width: 0; flex-direction: column; line-height: 1.2; }
 .payment-option strong { font-size: .82rem; white-space: nowrap; }
 .payment-option small { margin-top: 3px; color: #6c847b; font-size: .65rem; font-weight: 850; }
-.price-summary { display: grid; gap: 7px; margin: 18px 0 14px; }
+.price-summary { margin: 18px 0 14px; }
 .price-summary > div { display: flex; align-items: center; justify-content: space-between; }
 .price-summary span { color: #688078; font-size: .82rem; }
 .price-summary strong { color: #005a46; font-size: 1.3rem; }
 .price-summary .price-label { display: flex; align-items: flex-start; flex-direction: column; gap: 4px; }
 .price-summary .price-label small { padding: 3px 8px; border-radius: 999px; background: #eef7d9; color: #52751d; font-size: .68rem; font-weight: 900; line-height: 1.25; }
-.price-summary .deposit { padding-top: 8px; border-top: 1px dashed #cbdad2; }
-.price-summary .deposit strong { font-size: .92rem; }
+
+.price-summary .deposit strong { font-size: 1.12rem; }
 .whatsapp-main { width: 100%; min-height: 54px; border-radius: 15px; background: #005a46; color: #a9d253; font-size: .96rem; font-weight: 900; }
 .whatsapp-main:hover { background: #0b7059; color: #b9df6b; }
 .whatsapp-main.location-required { background: #5f756e; color: #dbe7e2; }

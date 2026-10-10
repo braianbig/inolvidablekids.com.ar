@@ -348,8 +348,7 @@ export default function Home() {
           </fieldset>
 
           <div className="price-summary">
-            <div><span className="price-label">Total Estimado<small>{priceBenefit}</small></span><strong>{formatPrice(total)}</strong></div>
-            <div className="deposit"><span>Reservación 50%</span><strong>{formatPrice(reservationAmount)}</strong></div>
+            <div className="deposit"><span className="price-label">Reservación 50%<small>{priceBenefit}</small></span><strong>{formatPrice(reservationAmount)}</strong></div>
           </div>
           <Button asChild size="lg" className={`whatsapp-main ${selectedLocation ? "" : "location-required"}`}><a href={selectedLocation ? whatsappUrl : "#mapa-evento"} target={selectedLocation ? "_blank" : undefined} rel={selectedLocation ? "noreferrer" : undefined}><img src="/social-whatsapp-light.png" alt="" /> {selectedLocation ? "Consultar Disponibilidad" : "Seleccioná la ubicación para consultar"}</a></Button>
           <p className="booking-note"><span>(Traslado gratis en Colonia Alberdi)</span><span>Para otras zonas, el flete se cotiza según la ubicación marcada.</span></p>

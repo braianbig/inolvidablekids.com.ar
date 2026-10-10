@@ -312,8 +312,8 @@ footer { padding: 60px max(5vw, 24px) 28px; background: #eff6f2; color: #55736a;
 .legal-page > * { position: relative; z-index: 1; }
 @keyframes legal-orb-drift { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(6px, -10px, 0); } }
 .legal-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 76px; padding: 10px max(5vw, 24px); background: transparent; }
-.legal-back { color: #005a46; font-size: .82rem; font-weight: 850; }
-.legal-back:hover { text-decoration: underline; text-underline-offset: 4px; }
+.legal-back { color: #005a46; font-size: .82rem; font-weight: 850; text-decoration: none; }
+.legal-back:hover, .legal-back:focus-visible { color: #0a7058; text-decoration: none; }
 .legal-hero { display: grid; min-height: 265px; place-items: center; padding: 56px 20px 75px; text-align: center; background: transparent; }
 .legal-hero::after { content: ""; position: absolute; width: 64px; height: 64px; right: 20%; top: 16%; border: 2px solid #a9d253; border-radius: 50%; opacity: .34; pointer-events: none; animation: legal-orb-drift 8s ease-in-out infinite alternate-reverse; }
 .legal-hero-inner { position: relative; z-index: 1; max-width: 850px; }

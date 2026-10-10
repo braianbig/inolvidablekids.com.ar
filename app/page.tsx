@@ -360,7 +360,7 @@ export default function Home() {
         <div className="calendar-heading">
           <span className="section-kicker light">¿Está libre tu fecha?</span>
           <h2>Consultá nuestras fechas disponibles</h2>
-          <p>Revisá el calendario y después armá tu combo para confirmar la disponibilidad.</p>
+          <p>Los días y horarios marcados muestran alquileres ya programados. Si tu fecha tiene una reserva, mirá la hora: puede quedar otro turno libre. Armá tu combo y consultanos para confirmar la disponibilidad.</p>
           <Button asChild size="lg" className="calendar-cta sparkle-action"><a href="#combos"><SparkleButtonLabel>¡Armá tu combo ahora!</SparkleButtonLabel></a></Button>
         </div>
         <div className="calendar-frame">

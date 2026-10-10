@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Política de privacidad | Inolvidabl
 export default function Privacidad() {
   return <LegalShell title="Política de privacidad" intro="Te contamos qué datos usamos y cómo podés consultar sobre ellos.">
     <article className="legal-card legal-article">
-      <p className="legal-updated">Última actualización: 9 de octubre de 2026</p>
+      <p className="legal-updated">Última actualización: 10 de octubre de 2026</p>
       <section><h2>1. Responsable de los datos</h2>
         <p>El responsable del tratamiento de los datos personales es <strong>Braian Omar Bigalke</strong>, titular de <strong>Inolvidable Kids</strong>, CUIT <strong>20-45390506-4</strong>, con domicilio en <strong>Avenida Uruguay, Lote 23° Secc. 3°, Colonia Alberdi, Misiones, Argentina</strong>.</p>
         <p>Podés escribir a <a href="mailto:inolvidablekids@gmail.com">inolvidablekids@gmail.com</a> para consultar cómo se usan tus datos o ejercer tus derechos.</p>

@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Términos y condiciones | Inolvidabl
 export default function Terminos() {
   return <LegalShell title="Términos y condiciones" intro="Información clara para organizar el festejo y contratar nuestros juegos.">
     <article className="legal-card legal-article">
-      <p className="legal-updated">Última actualización: 9 de octubre de 2026</p>
+      <p className="legal-updated">Última actualización: 10 de octubre de 2026</p>
       <section><h2>1. Quién presta el servicio</h2>
         <p>Inolvidable Kids es un emprendimiento de <strong>Braian Omar Bigalke</strong>, CUIT <strong>20-45390506-4</strong>, con domicilio en <strong>Avenida Uruguay, Lote 23° Secc. 3°, Colonia Alberdi, Misiones, Argentina</strong>.</p>
         <p>Para consultas, cambios, cancelaciones o reclamos, podés escribir a <a href="mailto:inolvidablekids@gmail.com">inolvidablekids@gmail.com</a> o comunicarte al <a href="tel:+543755639300">3755639300</a>. El área responsable es atención al cliente de Inolvidable Kids. Atendemos de lunes a viernes, de 8:00 a 18:00 (hora de Argentina); sábados y domingos, por cita previa. Las solicitudes mediante los formularios del sitio pueden enviarse en cualquier momento.</p>

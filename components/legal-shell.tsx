@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 
 const links = [
-  { href: "/terminos-y-condiciones", label: "Términos y condiciones" },
-  { href: "/politica-de-privacidad", label: "Política de privacidad" },
   { href: "/arrepentimiento", label: "Botón de arrepentimiento" },
   { href: "/baja-de-servicio", label: "Botón de baja de servicio" },
+  { href: "/politica-de-privacidad", label: "Política de privacidad" },
+  { href: "/terminos-y-condiciones", label: "Términos y condiciones" },
 ];
 
 export function LegalShell({ title, intro, children }: { title: string; intro: string; children: ReactNode }) {
@@ -15,7 +15,7 @@ export function LegalShell({ title, intro, children }: { title: string; intro: s
           <img src="/inolvidable-icon.png" alt="" className="brand-icon" />
           <span className="brand-name">Inolvidable</span><span className="brand-kids">KIDS</span>
         </a>
-        <a className="legal-back" href="/">← Volver al inicio</a>
+        <a className="legal-back" href="/">Volver al inicio</a>
       </header>
       <section className="legal-hero">
         <div className="legal-hero-inner">
@@ -27,8 +27,11 @@ export function LegalShell({ title, intro, children }: { title: string; intro: s
       <div className="legal-content">{children}</div>
       <footer className="legal-footer">
         <nav aria-label="Información legal">{links.map(link => <a key={link.href} href={link.href}>{link.label}</a>)}</nav>
-        <small>Atención: lunes a viernes, de 8:00 a 18:00. Sábados y domingos por cita previa.</small>
-        <a href="/">© {new Date().getFullYear()} Inolvidable Kids</a>
+        <small>Atención: Lunes a Viernes (8:00hs a 18:00hs). Sábados y Domingos (Cita previa).</small>
+        <div className="footer-legal">
+          <span>© {new Date().getFullYear()} Inolvidable Kids. Todos los derechos reservados.</span>
+          <span className="footer-love"><span aria-hidden="true">♥</span> Hecho con amor para todos los niños.</span>
+        </div>
       </footer>
     </main>
   );

@@ -277,7 +277,7 @@ export default function Home() {
           <div className="location-pill" data-detector-ignore="true"><MapPin /> Colonia Alberdi, Oberá, Alvear y más</div>
           <h1>
             <span>¡Los mejores juegos</span>
-            <span>para tus hijos!</span>
+            <span>para recuerdos inolvidables!</span>
           </h1>
           <p className="hero-lead"><span>Alquiler de peloteros, metegoles y camas elásticas</span><span>para cumpleaños en tu casa o donde quieras.</span></p>
           <div className="hero-actions">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import type { Map as LeafletMap, Marker as LeafletMarker } from "leaflet";
 import {
   CalendarDays, Check, Clock3, CloudRain, CreditCard, MapPin, MessageCircle,
@@ -93,6 +93,32 @@ export default function Home() {
     : id === "dos"
       ? selectedTwoGameIds.map((gameId) => gameImages[gameId])
       : [gameImages[selectedSingleGameId]];
+
+  const handleComboChange = (value: string) => {
+    setComboId(value);
+    if (value !== "completo" && window.matchMedia("(max-width: 700px)").matches) {
+      requestAnimationFrame(() => {
+        document.querySelector(".combo-inline-detail")?.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+          block: "nearest",
+        });
+      });
+    }
+  };
+
+  const gameSelector = (id: string) => id === "dos" ? (
+    <label className="field-label combo-detail">¿Qué dos juegos preferís?
+      <select value={twoGames} onChange={(event) => setTwoGames(event.target.value)}>
+        <option>Pelotero + Metegol</option><option>Pelotero + Cama Elástica</option><option>Metegol + Cama Elástica</option>
+      </select>
+    </label>
+  ) : id === "uno" ? (
+    <label className="field-label combo-detail">¿Qué juegos preferís?
+      <select value={singleGame} onChange={(event) => setSingleGame(event.target.value)}>
+        {gameOptions.map((game) => <option key={game}>{game}</option>)}
+      </select>
+    </label>
+  ) : null;
 
   useEffect(() => {
     const context = (document as unknown as {
@@ -275,36 +301,29 @@ export default function Home() {
             <div><span className="section-kicker booking-kicker">La diversión empieza acá</span><h2>¡Armá tu combo!</h2><p>Elegí tus juegos, la fecha y el tiempo que necesitás.</p></div>
             <span className="duration"><Clock3 /> {durationHours} horas</span>
           </div>
-          <RadioGroup value={comboId} onValueChange={setComboId} aria-label="Combos disponibles" className="combo-options">
+          <RadioGroup value={comboId} onValueChange={handleComboChange} aria-label="Combos disponibles" className="combo-options">
             {combos.map((item) => (
-              <label key={item.id} className={`combo-option ${comboId === item.id ? "selected" : ""}`}>
-                <RadioGroupItem value={item.id} className="combo-radio" aria-label={item.name} />
-                <span className={`combo-gallery images-${comboImages(item.id).length}`} aria-hidden="true">
-                  {comboImages(item.id).map((image) => <img key={image.src} src={image.src} alt="" />)}
-                </span>
-                <span className="combo-content">
-                  <span className="combo-topline"><strong>{item.name}</strong>{item.featured && <span className="popular">Más completo</span>}</span>
-                  <span className="combo-eyebrow">{comboGameLabel(item.id)}</span>
-                  <strong className="combo-price">{item.id === "uno" ? "Desde " : ""}{formatPrice(item.price)}</strong>
-                </span>
-              </label>
+              <Fragment key={item.id}>
+                <label className={`combo-option ${comboId === item.id ? "selected" : ""}`}>
+                  <RadioGroupItem value={item.id} className="combo-radio" aria-label={item.name} />
+                  <span className={`combo-gallery images-${comboImages(item.id).length}`} aria-hidden="true">
+                    {comboImages(item.id).map((image) => <img key={image.src} src={image.src} alt="" />)}
+                  </span>
+                  <span className="combo-content">
+                    <span className="combo-topline"><strong>{item.name}</strong>{item.featured && <span className="popular">Más completo</span>}</span>
+                    <span className="combo-eyebrow">{comboGameLabel(item.id)}</span>
+                    <strong className="combo-price">{item.id === "uno" ? "Desde " : ""}{formatPrice(item.price)}</strong>
+                  </span>
+                </label>
+                {comboId === item.id && item.id !== "completo" && (
+                  <div className="combo-inline-detail">{gameSelector(item.id)}</div>
+                )}
+              </Fragment>
             ))}
           </RadioGroup>
 
-          {comboId === "dos" && (
-            <label className="field-label combo-detail">¿Qué dos juegos preferís?
-              <select value={twoGames} onChange={(event) => setTwoGames(event.target.value)}>
-                <option>Pelotero + Metegol</option><option>Pelotero + Cama Elástica</option><option>Metegol + Cama Elástica</option>
-              </select>
-            </label>
-          )}
-
-          {comboId === "uno" && (
-            <label className="field-label combo-detail">¿Qué juego preferís?
-              <select value={singleGame} onChange={(event) => setSingleGame(event.target.value)}>
-                {gameOptions.map((game) => <option key={game}>{game}</option>)}
-              </select>
-            </label>
+          {comboId !== "completo" && (
+            <div className="combo-detail-desktop">{gameSelector(comboId)}</div>
           )}
 
           <fieldset className="choice-section">

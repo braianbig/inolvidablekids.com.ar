@@ -19,7 +19,6 @@ export function LegalShell({ title, intro, children }: { title: string; intro: s
       </header>
       <section className="legal-hero">
         <div className="legal-hero-inner">
-          <span className="legal-eyebrow">Inolvidable Kids · Información y solicitudes</span>
           <h1>{title}</h1>
           <p>{intro}</p>
         </div>

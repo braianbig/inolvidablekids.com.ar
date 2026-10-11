@@ -46,14 +46,14 @@ button, input, select { font: inherit; }
 .header-cta { justify-self: end; gap: 8px; height: 44px; padding-inline: 18px; border-radius: 999px; background: #005a46; color: #a9d253; font-weight: 900; }
 .header-cta:hover { background: #0a6d56; color: #b9df6b; }
 .header-cta img { width: 20px; height: 20px; object-fit: contain; }
-.hero { position: relative; overflow: hidden; display: grid; min-height: 640px; padding: clamp(70px, 8vw, 118px) max(5vw, 24px) clamp(78px, 9vw, 130px); place-items: center; background: radial-gradient(circle at 7% 18%, rgb(169 210 83 / 20%) 0 130px, transparent 132px), radial-gradient(circle at 86% 64%, rgb(0 90 70 / 7%) 0 135px, transparent 137px), linear-gradient(180deg, #f8fbf7 0%, #f8fbf7 76%, #edf5f1 100%); background-repeat: no-repeat; background-size: calc(100% + 40px) calc(100% + 40px), calc(100% + 64px) calc(100% + 64px), 100% 100%; animation: hero-circles-drift 12s ease-in-out infinite alternate; }
-.hero::after { content: ""; position: absolute; width: 120px; height: 120px; right: 9%; top: 14%; border: 2px solid #a9d253; border-radius: 34% 66% 55% 45%; transform: rotate(18deg); opacity: .35; animation: hero-shape-wave 8s ease-in-out infinite; }
+.hero { position: relative; overflow: hidden; display: grid; min-height: 640px; padding: clamp(70px, 8vw, 118px) max(5vw, 24px) clamp(78px, 9vw, 130px); place-items: center; background: radial-gradient(circle at 7% 18%, rgb(169 210 83 / 20%) 0 98px, transparent 100px), radial-gradient(circle at 86% 64%, rgb(0 90 70 / 7%) 0 101px, transparent 103px), linear-gradient(180deg, #f8fbf7 0%, #f8fbf7 76%, #edf5f1 100%); background-repeat: no-repeat; background-size: calc(100% + 40px) calc(100% + 40px), calc(100% + 64px) calc(100% + 64px), 100% 100%; animation: hero-circles-drift 12s ease-in-out infinite alternate; }
+.hero::after { content: ""; position: absolute; width: 90px; height: 90px; right: 9%; top: 14%; border: 2px solid #a9d253; border-radius: 34% 66% 55% 45%; transform: rotate(18deg); opacity: .35; animation: hero-shape-wave 8s ease-in-out infinite; }
 .hero-copy { position: relative; z-index: 1; width: 100%; max-width: 1120px; text-align: center; }
 .location-pill { position: relative; display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border: 1px solid rgb(0 90 70 / 12%); border-radius: 999px; background: rgb(255 255 255 / 78%); color: #005a46; font-size: .8rem; font-weight: 800; white-space: nowrap; box-shadow: 0 10px 30px rgb(0 90 70 / 6%); }
 .location-pill, .location-pill * { color: #005a46; text-decoration: none !important; pointer-events: none; }
 .location-pill svg { width: 16px; flex: none; }
 h1, h2, h3, p { margin-top: 0; }
-.hero h1 { max-width: 1180px; margin: 28px auto 24px; font-size: clamp(3.15rem, 5.8vw, 5.7rem); line-height: .98; letter-spacing: -.055em; font-weight: 950; color: #005a46; text-align: center; }
+.hero h1 { max-width: 1180px; margin: 28px auto 24px; font-size: clamp(3.3rem, 6.1vw, 5.95rem); line-height: .98; letter-spacing: -.055em; font-weight: 950; color: #005a46; text-align: center; }
 .hero h1 span { display: block; }
 .hero-lead { max-width: 760px; margin-inline: auto; color: #476a60; font-size: clamp(.98rem, 1.35vw, 1.16rem); line-height: 1.55; }
 .hero-lead span { display: block; white-space: nowrap; }
@@ -280,11 +280,11 @@ footer { padding: 60px max(5vw, 24px) 28px; background: linear-gradient(180deg, 
 @media (max-width: 700px) {
   .site-header { min-height: 66px; padding: 8px 16px; } .brand-icon { width: 40px; height: 40px; }
   .brand-name { font-size: 1.05rem; } .brand-kids { font-size: .56rem; } .header-cta { width: auto; height: 40px; padding: 0 12px; font-size: .73rem; }
-  .header-cta img { width: 18px; height: 18px; } .hero { padding: 48px 8px 62px; background: radial-gradient(circle at 10% 6%, rgb(169 210 83 / 20%) 0 19px, transparent 20px), radial-gradient(circle at 88% 83%, rgb(0 90 70 / 7%) 0 20px, transparent 21px), linear-gradient(180deg, #f8fbf7 0%, #f8fbf7 76%, #edf5f1 100%); background-repeat: no-repeat; background-size: 100% 100%; } .hero::after { width: 32px; height: 32px; right: 7%; top: 5%; } .hero h1 { margin-block: 24px 20px; font-size: clamp(1.42rem, 6.3vw, 1.95rem); line-height: 1.03; letter-spacing: -.045em; } .hero h1 span { white-space: nowrap; }
+  .header-cta img { width: 18px; height: 18px; } .hero { padding: 48px 8px 62px; background: radial-gradient(circle at 10% 6%, rgb(169 210 83 / 20%) 0 19px, transparent 20px), radial-gradient(circle at 88% 83%, rgb(0 90 70 / 7%) 0 20px, transparent 21px), linear-gradient(180deg, #f8fbf7 0%, #f8fbf7 76%, #edf5f1 100%); background-repeat: no-repeat; background-size: 100% 100%; } .hero::after { width: 32px; height: 32px; right: 7%; top: 5%; } .hero h1 { margin-block: 24px 20px; font-size: clamp(1.55rem, 6.7vw, 2.08rem); line-height: 1.03; letter-spacing: -.045em; } .hero h1 span { white-space: nowrap; }
   .location-pill { gap: 4px; padding: 8px 7px; font-size: clamp(.61rem, 2.75vw, .69rem); letter-spacing: -.025em; }
   .location-pill svg { width: 13px; }
   .hero-lead { max-width: 351px; font-size: clamp(.72rem, 3.45vw, .82rem); line-height: 1.55; } .hero-actions { align-items: flex-start; flex-direction: column; gap: 16px; }
-  .hero-actions { align-items: center; } .trust-row { display: grid; justify-content: center; } .payment-teaser { width: auto; max-width: 100%; padding: 8px 11px; } .payment-teaser > span { font-size: .65rem; }
+  .hero-actions { align-items: center; } .trust-row { display: grid; justify-content: center; justify-items: center; text-align: center; } .trust-row span { justify-content: center; } .payment-teaser { width: auto; max-width: 100%; padding: 8px 11px; } .payment-teaser > span { font-size: .65rem; }
   .calendar-section { padding: 52px 12px; } .calendar-heading h2 { font-size: clamp(1.8rem, 9vw, 2.65rem); } .calendar-frame { min-height: 440px; border-width: 4px; border-radius: 20px; } .calendar-frame iframe { height: 440px; }
   .booking-section { padding: 42px 12px; } .booking-card { padding: 20px 16px; border-radius: 24px; }
   .booking-heading { align-items: flex-start; } .booking-heading p { max-width: 210px; }

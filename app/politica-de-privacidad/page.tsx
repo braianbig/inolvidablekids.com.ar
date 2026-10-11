@@ -8,7 +8,7 @@ export default function Privacidad() {
     <article className="legal-card legal-article">
       <p className="legal-updated">Última actualización: 10 de octubre de 2026</p>
       <section><h2>1. ¿Quién cuida tus datos?</h2>
-        <p>El responsable del tratamiento de los datos personales es <strong>Braian Omar Bigalke</strong>, titular de <strong>Inolvidable Kids</strong>, CUIT <strong>20-45390506-4</strong>, con domicilio en <strong>Avenida Uruguay, Lote 23° Secc. 3°, Colonia Alberdi, Misiones, Argentina</strong>.</p>
+        <p><strong>Braian Omar Bigalke</strong>, titular de <strong>Inolvidable Kids</strong>, se encarga del uso y cuidado de los datos personales que compartís con nosotros. Su CUIT es <strong>20-45390506-4</strong> y su domicilio es <strong>Avenida Uruguay, Lote 23° Secc. 3°, Colonia Alberdi, Misiones, Argentina</strong>.</p>
         <p>Inolvidable Kids es una marca cuya solicitud de registro se encuentra en trámite ante el <strong>Instituto Nacional de la Propiedad Industrial (INPI)</strong>.</p>
         <p>Podés escribir a <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=inolvidablekids%40gmail.com" target="_blank" rel="noopener noreferrer">inolvidablekids@gmail.com</a> para consultar cómo se usan tus datos o ejercer tus derechos.</p>
       </section>

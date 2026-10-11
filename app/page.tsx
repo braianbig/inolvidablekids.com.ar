@@ -312,7 +312,7 @@ export default function Home() {
                   <span className="combo-content">
                     <span className="combo-topline"><strong>{item.name}</strong>{item.featured && <span className="popular">Más completo</span>}</span>
                     <span className="combo-eyebrow">{comboGameLabel(item.id)}</span>
-                    {item.id !== "uno" && <strong className="combo-price">{formatPrice(item.price)}</strong>}
+                    <strong className="combo-price">{formatPrice(item.price)}</strong>
                   </span>
                 </label>
                 {comboId === item.id && item.id !== "completo" && (

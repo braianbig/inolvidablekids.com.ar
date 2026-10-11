@@ -4,7 +4,7 @@ import { LegalShell } from "@/components/legal-shell";
 export const metadata: Metadata = { title: "Política de privacidad | Inolvidable Kids" };
 
 export default function Privacidad() {
-  return <LegalShell title="Política de privacidad" intro="Te contamos qué datos usamos y cómo podés consultar sobre ellos.">
+  return <LegalShell title="Política de privacidad" intro="Cómo cuidamos tus datos.">
     <article className="legal-card legal-article">
       <p className="legal-updated">Última actualización: 10 de octubre de 2026</p>
       <section><h2>1. ¿Quién cuida tus datos?</h2>

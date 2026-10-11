@@ -4,7 +4,7 @@ import { LegalShell } from "@/components/legal-shell";
 export const metadata: Metadata = { title: "Términos y condiciones | Inolvidable Kids" };
 
 export default function Terminos() {
-  return <LegalShell title="Términos y condiciones" intro="Información clara para organizar el festejo y contratar nuestros juegos.">
+  return <LegalShell title="Términos y condiciones" intro="Condiciones claras para tu reserva.">
     <article className="legal-card legal-article">
       <p className="legal-updated">Última actualización: 10 de octubre de 2026</p>
       <section><h2>1. ¿Quién presta el servicio?</h2>

@@ -288,10 +288,6 @@ export default function Home() {
             <span><ShieldCheck /> Equipos probados</span>
             <span><CloudRain /> Reprogramación por lluvia</span>
           </div>
-          <div className="payment-teaser">
-            <div className="payment-heading"><CreditCard /><strong>Métodos De Pago</strong></div>
-            <span>Transferencia Bancaria · Mercado Pago · Tarjeta de Débito</span>
-          </div>
         </div>
       </section>
 

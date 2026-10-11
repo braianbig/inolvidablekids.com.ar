@@ -301,7 +301,7 @@ footer { padding: 60px max(5vw, 24px) 28px; background: #eff6f2; color: #55736a;
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition-duration: .01ms !important; } .sparkle-dots-border, .sparkle-path, .hero, .hero::after { animation: none; } }
 
 @media (min-width: 1181px) {
-  .site-header { grid-template-columns: auto minmax(0, 1fr) auto; gap: clamp(12px, 2vw, 30px); }
+  .site-header { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: clamp(12px, 2vw, 30px); }
   .desktop-nav { display: flex; align-items: center; justify-content: center; gap: clamp(8px, 1.1vw, 18px); min-width: 0; font-size: clamp(.71rem, .9vw, .87rem); white-space: nowrap; }
 }
 @media (max-width: 1180px) { .site-header { grid-template-columns: 1fr auto; } .desktop-nav { display: none; } }

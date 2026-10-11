@@ -50,7 +50,7 @@ button, input, select { font: inherit; }
 .hero::after { content: ""; position: absolute; width: 120px; height: 120px; right: 9%; top: 14%; border: 2px solid #a9d253; border-radius: 34% 66% 55% 45%; transform: rotate(18deg); opacity: .35; animation: hero-shape-wave 8s ease-in-out infinite; }
 .hero-copy { position: relative; z-index: 1; width: 100%; max-width: 1120px; text-align: center; }
 @property --location-shine-angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
-.location-pill { position: relative; display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border: 2px solid transparent; border-radius: 999px; background: linear-gradient(#fff, #fff) padding-box, conic-gradient(from var(--location-shine-angle), #d0d9d3 0deg 300deg, #fff 322deg, #abbcb2 342deg, #d0d9d3 360deg) border-box; color: #005a46; font-size: .8rem; font-weight: 800; white-space: nowrap; box-shadow: 0 8px 30px rgb(0 90 70 / 6%); animation: location-border-shine 4s linear infinite; }
+.location-pill { position: relative; display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border: 1px solid transparent; border-radius: 999px; background: linear-gradient(#fff, #fff) padding-box, conic-gradient(from var(--location-shine-angle), #e5ece7 0deg 305deg, #fff 328deg, #dce7df 345deg, #e5ece7 360deg) border-box; color: #005a46; font-size: .8rem; font-weight: 800; white-space: nowrap; box-shadow: 0 8px 30px rgb(0 90 70 / 6%); animation: location-border-shine 7s linear infinite; }
 .location-pill, .location-pill * { color: #005a46; text-decoration: none !important; pointer-events: none; }
 .location-pill svg { width: 16px; flex: none; }
 @keyframes location-border-shine { to { --location-shine-angle: 360deg; } }

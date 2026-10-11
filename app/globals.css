@@ -381,5 +381,6 @@ footer { padding: 60px max(5vw, 24px) 28px; background: linear-gradient(180deg, 
   .footer-links { overflow: visible; white-space: normal; padding-bottom: 0; }
   .footer-links a, .footer-policy-links a { display: grid; min-height: 38px; place-items: center; padding: 7px 2px; }
   .social-section > strong { font-size: .74rem; }
-  .legal-footer nav { gap: 8px 14px; font-size: .68rem; }
+  .legal-footer nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, auto); grid-auto-flow: column; width: min(100%, 370px); gap: 6px 8px; font-size: .74rem; line-height: 1.3; text-align: center; }
+  .legal-footer nav a { display: grid; min-height: 38px; place-items: center; padding: 7px 2px; }
 }

@@ -21,7 +21,7 @@ const gameImages: Record<string, { src: string; alt: string }> = {
 };
 
 const combos = [
-  { id: "completo", name: "Combo completo", eyebrow: "Los tres juegos", price: 85000, featured: true },
+  { id: "completo", name: "Tres juegos", eyebrow: "Los tres juegos", price: 85000, featured: true },
   { id: "dos", name: "Dos juegos", eyebrow: "Elegí tus favoritos", price: 75000 },
   { id: "uno", name: "Un juego", eyebrow: "Elegí el que quieras", price: 65000 },
 ];
@@ -73,7 +73,6 @@ export default function Home() {
     ? "¡3 horas incluidas!"
     : durationOptions.find((item) => item.hours === durationHours)?.label;
   const total = combo.price + durationExtra;
-  const reservationAmount = total / 2;
 
   const selectedTwoGameIds = twoGames === "Pelotero + Cama Elástica"
     ? ["pelotero", "cama"]
@@ -250,10 +249,10 @@ export default function Home() {
       googleMapsLink ? `Ubicación del evento: ${googleMapsLink}.` : "Ubicación exacta: todavía no seleccionada.",
       `Medio de pago preferido: ${paymentMethod}.`,
       `Total estimado: ${formatPrice(total)}.`,
-      `Reservación 50%: ${formatPrice(reservationAmount)}.`,
+      "El precio final, incluido el traslado si corresponde, se confirma antes del pago.",
     ].filter(Boolean).join("\n");
     return `${PLAIN_WHATSAPP_URL}?text=${encodeURIComponent(message)}`;
-  }, [combo.name, comboId, date, durationHours, eventTime, googleMapsLink, paymentMethod, reservationAmount, singleGame, total, twoGames]);
+  }, [combo.name, comboId, date, durationHours, eventTime, googleMapsLink, paymentMethod, singleGame, total, twoGames]);
 
   return (
     <main>
@@ -284,7 +283,7 @@ export default function Home() {
             <Button asChild size="lg" className="primary-action sparkle-action"><a href="#combos"><SparkleButtonLabel>¡Elegir mi combo!</SparkleButtonLabel></a></Button>
           </div>
           <div className="trust-row" aria-label="Beneficios principales">
-            <span><Truck /> Traslado gratis en Colonia Alberdi</span>
+            <span><Truck /> Traslado gratis</span>
             <span><ShieldCheck /> Equipos probados</span>
             <span><CloudRain /> Reprogramación por lluvia</span>
           </div>
@@ -364,10 +363,9 @@ export default function Home() {
 
           <div className="price-summary">
             <div className="estimated-total"><span className="price-label">Total Estimado</span><small className={`price-benefit ${durationHours === 3 ? "included" : ""}`}>{priceBenefit}</small><strong>{formatPrice(total)}</strong></div>
-            <div className="deposit"><span className="price-label">Reservación 50%</span><strong>{formatPrice(reservationAmount)}</strong></div>
           </div>
           <Button asChild size="lg" className={`whatsapp-main ${selectedLocation ? "" : "location-required"}`}><a href={selectedLocation ? whatsappUrl : "#mapa-evento"} target={selectedLocation ? "_blank" : undefined} rel={selectedLocation ? "noreferrer" : undefined}><img src="/social-whatsapp-light.png" alt="" /> {selectedLocation ? "Consultar Disponibilidad" : "Seleccioná la ubicación para consultar"}</a></Button>
-          <p className="booking-note"><span>(Traslado gratis en Colonia Alberdi)</span><span>Para otras zonas, el flete se cotiza según la ubicación marcada.</span></p>
+          <p className="booking-note"><span>(Traslado gratis en Colonia Alberdi)</span><span>En otras localidades, te confirmamos el costo del traslado según el lugar del festejo antes de que pagues.</span></p>
         </div>
       </section>
 
@@ -435,17 +433,17 @@ export default function Home() {
 
       <section className="section weather-section">
         <CloudRain />
-        <div><span className="section-kicker">Si el clima no acompaña</span><h2>Tu reservación pasa a una nueva fecha.</h2><p>Podés reprogramar una vez sin costo por lluvia o condiciones que no permitan una instalación segura, sujeto a disponibilidad.</p></div>
+        <div><span className="section-kicker">Si el clima no acompaña</span><h2>Si llueve, buscamos otra fecha o te devolvemos el pago.</h2><p>Podés reprogramar sin costo si el clima impide una instalación segura. Si preferís cancelar, te devolvemos lo abonado.</p></div>
         <a href="#preguntas">Ver condiciones <span aria-hidden="true">→</span></a>
       </section>
 
       <section className="section faq-section" id="preguntas">
         <div className="section-heading compact"><span className="section-kicker">Antes de reservar</span><h2>Preguntas frecuentes</h2></div>
         <Accordion type="single" collapsible className="faq-list">
-          <AccordionItem value="lluvia"><AccordionTrigger>¿Qué pasa si llueve?</AccordionTrigger><AccordionContent>Reprogramamos una vez sin costo, sujeto a disponibilidad. La reservación pasa a la nueva fecha.</AccordionContent></AccordionItem>
+          <AccordionItem value="lluvia"><AccordionTrigger>¿Qué pasa si llueve?</AccordionTrigger><AccordionContent>Buscamos una nueva fecha sin costo. Si preferís cancelar, te devolvemos el total abonado.</AccordionContent></AccordionItem>
           <AccordionItem value="flete"><AccordionTrigger>¿El flete está incluido?</AccordionTrigger><AccordionContent>Sí, dentro de Colonia Alberdi. Para General Alvear, Oberá y alrededores se cotiza según la distancia.</AccordionContent></AccordionItem>
           <AccordionItem value="limpieza"><AccordionTrigger>¿Los juegos se entregan limpios?</AccordionTrigger><AccordionContent>Sí. Los equipos se limpian, revisan y prueban antes de cada evento.</AccordionContent></AccordionItem>
-          <AccordionItem value="pagos"><AccordionTrigger>¿Cómo puedo pagar?</AccordionTrigger><AccordionContent>Aceptamos transferencia bancaria, Mercado Pago, tarjeta de débito, tarjeta de crédito y efectivo.</AccordionContent></AccordionItem>
+          <AccordionItem value="pagos"><AccordionTrigger>¿Cómo puedo pagar?</AccordionTrigger><AccordionContent>Aceptamos transferencia bancaria, Mercado Pago, tarjeta de débito, tarjeta de crédito y efectivo. El pago completo, incluido el traslado si corresponde, se realiza antes de que salgamos a instalar.</AccordionContent></AccordionItem>
           <AccordionItem value="armado"><AccordionTrigger>¿Cuánto tarda el armado?</AccordionTrigger><AccordionContent>Depende del combo y del acceso. Coordinamos el armado para dejar todo listo antes del festejo.</AccordionContent></AccordionItem>
           <AccordionItem value="precio"><AccordionTrigger>¿Qué incluye el precio base?</AccordionTrigger><AccordionContent>Incluye 3 horas, traslado dentro de Colonia Alberdi, instalación, prueba de los equipos y retiro coordinado.</AccordionContent></AccordionItem>
         </Accordion>

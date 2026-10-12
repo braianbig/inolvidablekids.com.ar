@@ -305,7 +305,7 @@ export default function Home() {
                     {comboImages(item.id).map((image) => <img key={image.src} src={image.src} alt="" />)}
                   </span>
                   <span className="combo-content">
-                    <span className="combo-topline"><strong>{item.name}</strong>{item.featured && <span className="popular">Más completo</span>}</span>
+                    <span className="combo-topline"><strong>{item.name}</strong>{item.featured && <span className="popular">¡Más completo!</span>}</span>
                     <span className="combo-eyebrow">{comboGameLabel(item.id)}</span>
                     <strong className="combo-price">{formatPrice(item.price)}</strong>
                   </span>
@@ -365,7 +365,7 @@ export default function Home() {
             <div className="estimated-total"><span className="price-label">Total Estimado</span><small className={`price-benefit ${durationHours === 3 ? "included" : ""}`}>{priceBenefit}</small><strong>{formatPrice(total)}</strong></div>
           </div>
           <Button asChild size="lg" className={`whatsapp-main ${selectedLocation ? "" : "location-required"}`}><a href={selectedLocation ? whatsappUrl : "#mapa-evento"} target={selectedLocation ? "_blank" : undefined} rel={selectedLocation ? "noreferrer" : undefined}><img src="/social-whatsapp-light.png" alt="" /> {selectedLocation ? "Consultar Disponibilidad" : "Seleccioná la ubicación para consultar"}</a></Button>
-          <p className="booking-note"><span>(Traslado gratis en Colonia Alberdi)</span><span>En otras localidades, te confirmamos el costo del traslado según el lugar del festejo antes de que pagues.</span></p>
+          <p className="booking-note"><span>(Traslado gratis en Colonia Alberdi)</span><span>Para otras zonas, el flete se cotiza según la ubicación marcada.</span></p>
         </div>
       </section>
 

@@ -22,6 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es-AR">
+      <head><meta name="color-scheme" content="only light" /></head>
       <body className="antialiased">{children}</body>
     </html>
   );

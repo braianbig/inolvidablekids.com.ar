@@ -367,7 +367,7 @@ export default function Home() {
           <div className="price-summary">
             <div className="estimated-total"><span className="price-label">Total Estimado</span><small className={`price-benefit ${durationHours === 3 ? "included" : ""}`}>{priceBenefit}</small><strong>{formatPrice(total)}</strong></div>
             {cashDiscount > 0 && <>
-              <div className="cash-discount"><span>Descuento 10 %</span><strong>-{formatPrice(cashDiscount)}</strong></div>
+              <div className="cash-discount"><span>Descuento 10%</span><strong>-{formatPrice(cashDiscount)}</strong></div>
               <div className="cash-final"><span>Total con descuento</span><strong>{formatPrice(totalWithDiscount)}</strong></div>
             </>}
           </div>

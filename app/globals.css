@@ -12,6 +12,7 @@
 }
 
 :root {
+  color-scheme: only light;
   --background: #f8fbf7; --foreground: #103d32; --card: #ffffff; --card-foreground: #103d32;
   --popover: #ffffff; --popover-foreground: #103d32; --primary: #005a46; --primary-foreground: #ffffff;
   --secondary: #ecf4e8; --secondary-foreground: #005a46; --muted: #edf3ef; --muted-foreground: #55746b;

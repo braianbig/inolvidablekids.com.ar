@@ -383,3 +383,9 @@ footer { padding: 60px max(5vw, 24px) 28px; background: linear-gradient(180deg, 
   .legal-footer nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, auto); grid-auto-flow: column; width: min(100%, 370px); gap: 6px 8px; font-size: .74rem; line-height: 1.3; text-align: center; }
   .legal-footer nav a { display: grid; min-height: 38px; place-items: center; padding: 7px 2px; }
 }
+
+.price-summary .cash-discount, .price-summary .cash-final { gap: 8px; }
+.price-summary .cash-discount strong, .price-summary .cash-final strong { margin-left: auto; font-size: 1.12rem; white-space: nowrap; }
+.price-summary .cash-discount strong { color: #398a62; }
+.price-summary .cash-final { padding-top: 9px; border-top: 1px solid #cbdad2; }
+@media (max-width: 380px) { .price-summary .cash-discount strong, .price-summary .cash-final strong { font-size: .95rem; } }

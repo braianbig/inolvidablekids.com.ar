@@ -24,7 +24,7 @@ export default function Terminos() {
       <section><h2>4. ¿Cómo confirmar la fecha?</h2>
         <p>La fecha queda confirmada cuando:</p>
         <ol><li>Acordamos por escrito la fecha, el horario, el domicilio, los juegos, la duración y el precio final, incluido el traslado cuando corresponda.</li><li>Recibimos el <strong>pago completo</strong> y su comprobante antes de salir a instalar los juegos.</li><li>Inolvidable Kids confirma por escrito la recepción del pago y la disponibilidad de la fecha.</li></ol>
-        <p>El precio final se abona en un solo pago antes de que salgamos a instalar los juegos. Aceptamos los medios de pago que indiquemos al cotizar, entre ellos transferencia bancaria, Mercado Pago, tarjetas y efectivo, según disponibilidad. Cualquier recargo aplicable se informará <strong>antes de confirmar el pago</strong>. Emitimos el comprobante fiscal correspondiente por el precio total acordado.</p>
+        <p>El precio final se abona en un solo pago antes de que salgamos a instalar los juegos. Aceptamos los medios de pago que indiquemos al cotizar, entre ellos transferencia bancaria, Mercado Pago, tarjetas y efectivo, según disponibilidad. Cualquier descuento o recargo aplicable se informará <strong>antes de confirmar el pago</strong>. Emitimos el comprobante fiscal correspondiente por el precio total acordado.</p>
       </section>
       <section><h2>5. ¿Instalación y uso seguro?</h2>
         <p>La persona contratante deberá facilitar el acceso al lugar y disponer de un espacio <strong>firme, nivelado y despejado</strong>, con las dimensiones necesarias para instalar los juegos. Cuando el equipo requiera electricidad, deberá haber un punto de conexión accesible y seguro.</p>

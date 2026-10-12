@@ -4,7 +4,7 @@ import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import type { Map as LeafletMap, Marker as LeafletMarker } from "leaflet";
 import {
   CalendarDays, Check, Clock3, CloudRain, CreditCard, MapPin, MessageCircle,
-  Navigation, ShieldCheck, Sparkles, Truck,
+  Navigation, ShieldCheck, Truck,
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
@@ -289,7 +289,6 @@ export default function Home() {
           <div className="trust-row" aria-label="Beneficios principales">
             <span><Truck /> Traslado gratis</span>
             <span><ShieldCheck /> Equipos probados</span>
-            <span><Sparkles /> Juegos limpios</span>
             <span><CloudRain /> Reprogramación por lluvia</span>
           </div>
         </div>
@@ -298,7 +297,7 @@ export default function Home() {
       <section className="booking-section" id="combos">
         <div className="booking-card">
           <div className="booking-heading">
-            <div><span className="section-kicker booking-kicker">Tu fiesta, a tu manera</span><h2>¡Armá tu diversión!</h2><p>Elegí juegos, fecha y duración.</p></div>
+            <div><h2>¡Armá tu diversión!</h2><p>Elegí juegos, fecha y duración a tu gusto.</p></div>
           </div>
           <RadioGroup value={comboId} onValueChange={handleComboChange} aria-label="Combos disponibles" className="combo-options">
             {combos.map((item) => (
@@ -373,7 +372,7 @@ export default function Home() {
             </>}
           </div>
           <Button asChild size="lg" className={`whatsapp-main ${selectedLocation ? "" : "location-required"}`}><a href={selectedLocation ? whatsappUrl : "#mapa-evento"} target={selectedLocation ? "_blank" : undefined} rel={selectedLocation ? "noreferrer" : undefined}><img src="/social-whatsapp-light.png" alt="" /> {selectedLocation ? "Consultar Disponibilidad" : "Seleccioná la ubicación para consultar"}</a></Button>
-          <p className="booking-note"><span>(Traslado gratis en Colonia Alberdi)</span><span>Para otras zonas, el flete se cotiza según la ubicación marcada.</span></p>
+          <p className="booking-note"><span>Para eventos dentro de Colonia Alberdi, el traslado es gratis.</span><span>Para otras zonas, el flete se cotiza según la ubicación marcada.</span></p>
         </div>
       </section>
 

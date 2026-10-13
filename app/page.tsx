@@ -73,8 +73,6 @@ export default function Home() {
     ? "¡3 horas incluidas!"
     : durationOptions.find((item) => item.hours === durationHours)?.label;
   const total = combo.price + durationExtra;
-  const cashDiscount = paymentMethod === "Efectivo" ? Math.round(total * 0.1) : 0;
-  const totalWithDiscount = total - cashDiscount;
 
   const selectedTwoGameIds = twoGames === "Pelotero + Cama Elástica"
     ? ["pelotero", "cama"]
@@ -251,12 +249,10 @@ export default function Home() {
       googleMapsLink ? `Ubicación del evento: ${googleMapsLink}.` : "Ubicación exacta: todavía no seleccionada.",
       `Medio de pago preferido: ${paymentMethod}.`,
       `Total estimado: ${formatPrice(total)}.`,
-      cashDiscount ? `Descuento en efectivo (10 %): -${formatPrice(cashDiscount)}.` : "",
-      cashDiscount ? `Total con descuento: ${formatPrice(totalWithDiscount)}.` : "",
       "El precio final, incluido el traslado si corresponde, se confirma antes del pago.",
     ].filter(Boolean).join("\n");
     return `${PLAIN_WHATSAPP_URL}?text=${encodeURIComponent(message)}`;
-  }, [combo.name, comboId, date, durationHours, eventTime, googleMapsLink, paymentMethod, singleGame, total, cashDiscount, totalWithDiscount, twoGames]);
+  }, [combo.name, comboId, date, durationHours, eventTime, googleMapsLink, paymentMethod, singleGame, total, twoGames]);
 
   return (
     <main>
@@ -358,7 +354,7 @@ export default function Home() {
             <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod} className="payment-options" aria-label="Medio de pago">
               {paymentMethods.map((method) => (
                 <label key={method} className={`payment-option ${paymentMethod === method ? "selected" : ""}`}>
-                  <RadioGroupItem value={method} /> <span><strong>{method}</strong>{method === "Efectivo" && <small>10 % de descuento</small>}</span>
+                  <RadioGroupItem value={method} /> <span><strong>{method}</strong></span>
                 </label>
               ))}
             </RadioGroup>
@@ -366,10 +362,6 @@ export default function Home() {
 
           <div className="price-summary">
             <div className="estimated-total"><span className="price-label">Total Estimado</span><small className={`price-benefit ${durationHours === 3 ? "included" : ""}`}>{priceBenefit}</small><strong>{formatPrice(total)}</strong></div>
-            {cashDiscount > 0 && <>
-              <div className="cash-discount"><span>Descuento 10%</span><strong>-{formatPrice(cashDiscount)}</strong></div>
-              <div className="cash-final"><span>Total con descuento</span><strong>{formatPrice(totalWithDiscount)}</strong></div>
-            </>}
           </div>
           <Button asChild size="lg" className={`whatsapp-main ${selectedLocation ? "" : "location-required"}`}><a href={selectedLocation ? whatsappUrl : "#mapa-evento"} target={selectedLocation ? "_blank" : undefined} rel={selectedLocation ? "noreferrer" : undefined}><img src="/social-whatsapp-light.png" alt="" /> {selectedLocation ? "Consultar Disponibilidad" : "Seleccioná la ubicación para consultar"}</a></Button>
           <p className="booking-note"><span>Para eventos dentro de Colonia Alberdi, el traslado es gratis.</span><span>Para otras zonas, el flete se cotiza según la ubicación marcada.</span></p>
@@ -450,7 +442,7 @@ export default function Home() {
           <AccordionItem value="lluvia"><AccordionTrigger>¿Qué pasa si llueve?</AccordionTrigger><AccordionContent>Buscamos una nueva fecha sin costo. Si preferís cancelar, te devolvemos el total abonado.</AccordionContent></AccordionItem>
           <AccordionItem value="flete"><AccordionTrigger>¿El flete está incluido?</AccordionTrigger><AccordionContent>Sí, dentro de Colonia Alberdi. Para General Alvear, Oberá y alrededores se cotiza según la distancia.</AccordionContent></AccordionItem>
           <AccordionItem value="limpieza"><AccordionTrigger>¿Los juegos se entregan limpios?</AccordionTrigger><AccordionContent>Sí. Los equipos se limpian, revisan y prueban antes de cada evento.</AccordionContent></AccordionItem>
-          <AccordionItem value="pagos"><AccordionTrigger>¿Cómo puedo pagar?</AccordionTrigger><AccordionContent>Aceptamos transferencia bancaria, Mercado Pago, tarjeta de débito, tarjeta de crédito y efectivo. Si elegís efectivo, tenés 10 % de descuento en los juegos y horas elegidos. El pago completo, incluido el traslado si corresponde, se realiza antes de que salgamos a instalar.</AccordionContent></AccordionItem>
+          <AccordionItem value="pagos"><AccordionTrigger>¿Cómo puedo pagar?</AccordionTrigger><AccordionContent>Aceptamos transferencia bancaria, Mercado Pago, tarjeta de débito, tarjeta de crédito y efectivo. El pago completo, incluido el traslado si corresponde, se realiza antes de que salgamos a instalar.</AccordionContent></AccordionItem>
           <AccordionItem value="armado"><AccordionTrigger>¿Cuánto tarda el armado?</AccordionTrigger><AccordionContent>Depende del combo y del acceso. Coordinamos el armado para dejar todo listo antes del festejo.</AccordionContent></AccordionItem>
           <AccordionItem value="precio"><AccordionTrigger>¿Qué incluye el precio base?</AccordionTrigger><AccordionContent>Incluye 3 horas, traslado dentro de Colonia Alberdi, instalación, prueba de los equipos y retiro coordinado.</AccordionContent></AccordionItem>
         </Accordion>

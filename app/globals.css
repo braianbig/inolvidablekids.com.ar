@@ -384,12 +384,6 @@ footer { padding: 60px max(5vw, 24px) 28px; background: linear-gradient(180deg, 
   .legal-footer nav a { display: grid; min-height: 38px; place-items: center; padding: 7px 2px; }
 }
 
-.price-summary .cash-discount, .price-summary .cash-final { gap: 8px; }
-.price-summary .cash-discount strong, .price-summary .cash-final strong { margin-left: auto; font-size: 1.12rem; white-space: nowrap; }
-.price-summary .cash-discount strong { color: #398a62; }
-.price-summary .cash-final { padding-top: 9px; border-top: 1px solid #cbdad2; }
-@media (max-width: 380px) { .price-summary .cash-discount strong, .price-summary .cash-final strong { font-size: .95rem; } }
-
 .booking-card { padding-top: clamp(16px, 2.8vw, 36px); }
 .booking-heading h2 { font-weight: 900; }
 @media (max-width: 700px) { .booking-card { padding-top: 14px; } }

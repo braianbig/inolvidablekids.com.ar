@@ -288,7 +288,7 @@ footer { padding: 60px max(5vw, 24px) 28px; background: linear-gradient(180deg, 
   .hero-actions { align-items: center; } .trust-row { display: grid; justify-content: center; justify-items: center; text-align: center; } .trust-row span { justify-content: center; } .payment-teaser { width: auto; max-width: 100%; padding: 8px 11px; } .payment-teaser > span { font-size: .65rem; }
   .calendar-section { padding: 52px 12px; } .calendar-heading h2 { font-size: clamp(1.8rem, 9vw, 2.65rem); } .calendar-frame { min-height: 440px; border-width: 4px; border-radius: 20px; } .calendar-frame iframe { height: 440px; }
   .booking-section { padding: 42px 12px; } .booking-card { padding: 20px 16px; border-radius: 24px; }
-  .booking-heading { align-items: flex-start; } .booking-heading p { max-width: 210px; }
+  .booking-heading { align-items: flex-start; } .booking-heading p { max-width: none; font-size: clamp(.68rem, 3.2vw, .9rem); white-space: nowrap; }
   .combo-options { grid-template-columns: 1fr; } .combo-option { display: grid; grid-template-columns: minmax(0, 1fr); }
   .combo-inline-detail { display: block; margin-top: -4px; }
   .combo-inline-detail .field-label { max-width: none; margin-top: 0; }

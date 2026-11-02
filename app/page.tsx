@@ -275,10 +275,10 @@ export default function Home() {
         <div className="hero-copy">
           <div className="location-pill" data-detector-ignore="true"><MapPin /> Colonia Alberdi, Oberá, Alvear y más</div>
           <h1>
-            <span>¡Los mejores juegos</span>
+            <span>¡Los mejores juegos </span>
             <span>para recuerdos inolvidables!</span>
           </h1>
-          <p className="hero-lead"><span>Alquiler de peloteros, metegoles y camas elásticas</span><span>para cumpleaños en tu casa o donde quieras.</span></p>
+          <p className="hero-lead"><span>Alquiler de peloteros, metegoles y camas elásticas </span><span>para cumpleaños en tu casa o donde quieras.</span></p>
           <div className="hero-actions">
             <Button asChild size="lg" className="primary-action sparkle-action"><a href="#combos"><SparkleButtonLabel>¡Elegir mi combo!</SparkleButtonLabel></a></Button>
           </div>

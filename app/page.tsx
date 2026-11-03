@@ -60,6 +60,7 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [marketingConsent, setMarketingConsent] = useState(false);
+  const [consentError, setConsentError] = useState(false);
   const [website, setWebsite] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
@@ -239,6 +240,11 @@ export default function Home() {
     event.preventDefault();
     if (submissionRef.current) return;
     setSubmitError("");
+    if (!marketingConsent) {
+      setConsentError(true);
+      document.getElementById("marketing-consent")?.focus();
+      return;
+    }
     if (!selectedLocation) {
       setSubmitError("Marcá la ubicación exacta del evento antes de enviar.");
       document.getElementById("mapa-evento")?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -367,14 +373,14 @@ export default function Home() {
 
           <div className="form-grid contact-grid">
             <label className="field-label">Nombre y apellido del adulto<input name="name" autoComplete="name" required minLength={3} maxLength={120} value={fullName} onChange={event => setFullName(event.target.value)} placeholder="Tu nombre completo" /></label>
-            <label className="field-label">Número de WhatsApp<input name="tel" type="tel" autoComplete="tel" inputMode="tel" required maxLength={25} value={whatsapp} onChange={event => setWhatsapp(event.target.value)} placeholder="Ej.: 3755 123456" /><small>Con código de área. Si es de otro país, incluí + y el código de país.</small></label>
+            <label className="field-label">Número de WhatsApp<input name="tel" type="tel" autoComplete="tel" inputMode="tel" required maxLength={25} value={whatsapp} onChange={event => setWhatsapp(event.target.value)} placeholder="Ejemplo: 3755 12 34 56" /></label>
             <label className="field-label">Correo electrónico (opcional)<input name="email" type="email" autoComplete="email" maxLength={254} value={email} onChange={event => setEmail(event.target.value)} placeholder="nombre@correo.com" /></label>
           </div>
           <label className="consultation-honeypot" aria-hidden="true">Sitio web<input name="website" tabIndex={-1} autoComplete="off" value={website} onChange={event => setWebsite(event.target.value)} /></label>
 
           <section className="location-picker" id="mapa-evento" aria-labelledby="location-picker-title">
             <div className="location-picker-head">
-              <div><span className="map-label"><Navigation /> Ubicación exacta del evento</span><strong id="location-picker-title">Marcá el lugar en el mapa</strong><small>Si usás el GPS, comprobá que el punto sea el lugar del evento.</small></div>
+              <div><span className="map-label"><Navigation /> Ubicación exacta del evento</span><strong id="location-picker-title">Marcá el lugar en el mapa</strong><small className="gps-hint"><span className="gps-hint-full">Usá el GPS y comprobá que el punto sea el lugar del evento.</span><span className="gps-hint-short">Usá el GPS y comprobá el lugar del evento.</span></small></div>
               <button type="button" className="gps-button" onClick={useCurrentLocation}>📍 Usar mi ubicación actual (GPS)</button>
             </div>
             <div ref={mapContainerRef} className="event-map" aria-label="Mapa para elegir la ubicación exacta del evento" />
@@ -384,14 +390,11 @@ export default function Home() {
             </div>
           </section>
 
-          <div className="consultation-consent">
-            <p>Usaremos tus datos para responder esta consulta y coordinar el servicio. Se guardan en Cloudflare y en una planilla privada de Google Sheets. <a href="/politica-de-privacidad" target="_blank" rel="noopener noreferrer">Ver política de privacidad</a>.</p>
-            <label><input type="checkbox" checked={marketingConsent} onChange={event => setMarketingConsent(event.target.checked)} /><span>Quiero recibir novedades y promociones de Inolvidable Kids por WhatsApp o correo. Es opcional y puedo darme de baja cuando quiera.</span></label>
+          <div className={`consultation-consent ${consentError ? "invalid" : ""}`}>
+            <label><input id="marketing-consent" type="checkbox" required checked={marketingConsent} aria-invalid={consentError} onInvalid={() => setConsentError(true)} onChange={event => { setMarketingConsent(event.target.checked); if (event.target.checked) setConsentError(false); }} /><span>Quiero recibir novedades y promociones de Inolvidable Kids por WhatsApp y Correo.</span></label>
           </div>
           {submitError && <p className="consultation-error" role="alert">{submitError} <a href={PLAIN_WHATSAPP_URL} target="_blank" rel="noreferrer">Hablar por WhatsApp</a></p>}
-          {savedCode ? <a className="consultation-saved" href={`/solicitud-enviada?codigo=${encodeURIComponent(savedCode)}`}>Tu consulta {savedCode} se guardó. Ver confirmación →</a> : <Button type="submit" size="lg" disabled={isSubmitting} className="whatsapp-main"><MessageCircle aria-hidden="true" />{isSubmitting ? "Guardando tu consulta…" : "Consultar disponibilidad"}</Button>}
-          <p className="consultation-pending">La disponibilidad y el precio se confirman por WhatsApp. Enviar esta consulta no reserva la fecha.</p>
-          <p className="booking-note"><span>Para eventos dentro de Colonia Alberdi, el traslado es gratis.</span><span>Para otras zonas, el flete se cotiza según la ubicación marcada.</span></p>
+          {savedCode ? <a className="consultation-saved" href={`/solicitud-enviada?codigo=${encodeURIComponent(savedCode)}`}>Tu consulta {savedCode} se guardó. Ver confirmación →</a> : <Button type="submit" size="lg" disabled={isSubmitting} className="whatsapp-main" onClick={() => setConsentError(!marketingConsent)}><MessageCircle aria-hidden="true" />{isSubmitting ? "Guardando tu consulta…" : "Consultar disponibilidad"}</Button>}
         </form>
       </section>
 

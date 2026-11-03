@@ -13,5 +13,9 @@ const binding = {
 // Vinext recrea este archivo en cada build; the deployed Worker must use
 // the existing production database instead of its preview placeholder.
 config.d1_databases = [binding];
+// Preserve dashboard-managed variables without publishing private file IDs.
+config.keep_vars = true;
+// Runtime secret GOOGLE_SERVICE_ACCOUNT_JSON is kept in Cloudflare, never here.
+config.triggers = { ...config.triggers, crons: ["*/5 * * * *"] };
 writeFileSync(configPath, JSON.stringify(config, null, 2) + "\n");
 console.log("Configured the D1 binding for the production Worker.");

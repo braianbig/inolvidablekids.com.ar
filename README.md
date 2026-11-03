@@ -2,18 +2,20 @@
 
 Landing page oficial de **Inolvidable Kids**, emprendimiento de alquiler de juegos infantiles en Colonia Alberdi, General Alvear, Oberá y alrededores.
 
-La página permite conocer los juegos, armar un combo, seleccionar la fecha, la duración y el medio de pago, marcar la ubicación exacta del evento en un mapa y enviar la consulta completa por WhatsApp.
+La página permite elegir juegos, fecha, hora y duración, marcar el evento en el mapa y registrar una consulta con nombre, WhatsApp y correo opcional. Guarda la consulta en D1, la sincroniza con Google Sheets y muestra una confirmación con código y botón para continuar por WhatsApp.
 
 ## Funciones principales
 
-- Selección entre combo completo, dos juegos o un juego.
+- Selección entre combo completo, combo dúo o un juego, sin precios publicados en el formulario.
 - Elección de pelotero, metegol y cama elástica.
-- Duraciones de 3, 4 o 5 horas con cálculo automático del ahorro.
-- Cálculo automático del total y de la reservación del 50 %.
+- Duraciones de 3, 4 o 5 horas.
+- Consulta de disponibilidad: enviar el formulario no confirma ni cobra una reserva.
 - Calendario público de disponibilidad mediante Google Calendar.
 - Mapa interactivo con Leaflet y OpenStreetMap.
 - Ubicación por GPS o selección manual en el mapa.
-- Consulta por WhatsApp con los datos elegidos.
+- Registro en D1 y copia a la pestaña Consultas, con fecha y hora como valores nativos de Sheets.
+- Código único y reenvíos idempotentes; autorización opcional de promociones desmarcada por defecto.
+- Página de confirmación con la misma estética del sitio y mensaje preparado para WhatsApp.
 - Información de seguridad, lluvia y preguntas frecuentes.
 - Diseño adaptable para computadoras, tablets y teléfonos.
 
@@ -99,6 +101,20 @@ git push
 ```
 
 ## Publicación en Cloudflare
+
+### Configuración de consultas
+
+- Binding D1 `DB`: base existente `inolvidable-kids-solicitudes`.
+- Secreto de runtime `GOOGLE_SERVICE_ACCOUNT_JSON`: JSON completo de la cuenta de servicio. Cargarlo en Cloudflare; nunca subirlo al repositorio ni a variables de compilación públicas.
+- Variable `GOOGLE_SHEETS_SPREADSHEET_ID`: identificador de la planilla privada, guardado en Cloudflare. El despliegue usa `keep_vars` para conservar las variables del panel sin publicar sus valores.
+- Habilitar Google Sheets API en el proyecto de Google y compartir la planilla con la cuenta de servicio como Editor.
+- La pestaña `Consultas` mantiene su cabecera en A5:O5. El proceso verifica los encabezados antes de escribir, conserva filas ocupadas, formatos y listas, y no modifica una fila cuyo código ya existe.
+- El primer uso crea, si faltan, `consultation_requests` y tablas internas de control de sincronización y frecuencia. No altera `legal_requests`.
+- El Worker exporta un controlador programado. El despliegue configura `*/5 * * * *` para reintentar las consultas pendientes, además del intento inmediato en segundo plano al recibir cada consulta.
+- Si Google falla, la consulta sigue guardada en D1. El registro contiene `sheets_sync_status`, `sheets_sync_attempts` y `sheets_last_error` para seguimiento. No se registran claves ni datos de contacto en los logs.
+- La ubicación exacta y los juegos figuran en Observaciones. La localidad no se deduce automáticamente; queda indicada como ubicación en mapa hasta completarla manualmente.
+
+Validación: `pnpm test` prueba persistencia, reintentos, firma de autenticación, duplicados y conservación de notas manuales usando SQLite y Google simulado. Para probar la integración real, enviar una consulta identificada como prueba y verificar su código en D1 y en Consultas. No enviar el mensaje de WhatsApp si solo se está verificando el formulario.
 
 El proyecto genera un Worker compatible con Cloudflare.
 

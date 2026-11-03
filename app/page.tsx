@@ -1,9 +1,12 @@
 "use client";
 
-import { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
+import { argentinaToday, CONSULTATION_STORAGE_KEY, DRAFT_KEY, newConsultationId, validateConsultation } from "@/lib/consultation";
+import type { ConsultationReceipt } from "@/lib/consultation";
+import type { FormEvent } from "react";
 import type { Map as LeafletMap, Marker as LeafletMarker } from "leaflet";
 import {
-  CalendarDays, Check, Clock3, CloudRain, CreditCard, MapPin, MessageCircle,
+  CalendarDays, Check, Clock3, CloudRain, MapPin, MessageCircle,
   Navigation, ShieldCheck, Truck,
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -21,23 +24,14 @@ const gameImages: Record<string, { src: string; alt: string }> = {
 };
 
 const combos = [
-  { id: "completo", name: "Tres juegos", eyebrow: "Los tres juegos", price: 85000, featured: true },
-  { id: "dos", name: "Dos juegos", eyebrow: "Elegí tus favoritos", price: 75000 },
-  { id: "uno", name: "Un juego", eyebrow: "Elegí el que quieras", price: 65000 },
+  { id: "completo", name: "Combo completo", eyebrow: "Los tres juegos", featured: true },
+  { id: "dos", name: "Combo dúo", eyebrow: "Elegí tus favoritos" },
+  { id: "uno", name: "Un juego", eyebrow: "Elegí el que quieras" },
 ];
 
 const gameOptions = ["Pelotero", "Metegol", "Cama Elástica"];
 
-const durationOptions = [
-  { hours: 3, extra: 0, label: "Incluido" },
-  { hours: 4, extra: 20000, label: "¡Ahorrás $8.000!" },
-  { hours: 5, extra: 35000, label: "¡Ahorrás $10.000!" },
-];
-
-const paymentMethods = ["Transferencia Bancaria", "Mercado Pago", "Tarjeta de Débito", "Tarjeta de Crédito", "Efectivo"];
-
-const formatPrice = (value: number) =>
-  new Intl.NumberFormat("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 }).format(value);
+const durationOptions = [{ hours: 3 }, { hours: 4 }, { hours: 5 }];
 
 function SparkleButtonLabel({ children }: { children: string }) {
   return (
@@ -62,18 +56,22 @@ export default function Home() {
   const [durationHours, setDurationHours] = useState(3);
   const [selectedLocation, setSelectedLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [geoStatus, setGeoStatus] = useState("Elegí el lugar exacto tocando el mapa.");
-  const [paymentMethod, setPaymentMethod] = useState("Transferencia Bancaria");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [marketingConsent, setMarketingConsent] = useState(false);
+  const [website, setWebsite] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [savedCode, setSavedCode] = useState("");
+  const [minimumDate, setMinimumDate] = useState("");
+  const submissionRef = useRef(false);
+  const draftIdRef = useRef("");
+  useEffect(() => { setMinimumDate(argentinaToday()); }, []);
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<LeafletMap | null>(null);
   const markerRef = useRef<LeafletMarker | null>(null);
   const setMapPointRef = useRef<((lat: number, lng: number, focus?: boolean) => void) | null>(null);
-  const combo = combos.find((item) => item.id === comboId) ?? combos[0];
-  const durationExtra = durationOptions.find((item) => item.hours === durationHours)?.extra ?? 0;
-  const priceBenefit = durationHours === 3
-    ? "¡3 horas incluidas!"
-    : durationOptions.find((item) => item.hours === durationHours)?.label;
-  const total = combo.price + durationExtra;
-
   const selectedTwoGameIds = twoGames === "Pelotero + Cama Elástica"
     ? ["pelotero", "cama"]
     : twoGames === "Metegol + Cama Elástica"
@@ -135,7 +133,6 @@ export default function Home() {
     if (!context?.registerTool) return;
     const lifecycle = new AbortController();
     const validCombos = new Set(["completo", "dos", "uno"]);
-    const validPayments = new Set(paymentMethods);
     void Promise.resolve(context.registerTool({
       name: "configure_combo_consultation",
       title: "Configurar consulta de combo",
@@ -149,7 +146,9 @@ export default function Home() {
           durationHours: { type: "number", enum: [3, 4, 5] },
           latitude: { type: "number", description: "Latitud exacta del evento." },
           longitude: { type: "number", description: "Longitud exacta del evento." },
-          paymentMethod: { type: "string", enum: paymentMethods },
+          name: { type: "string", description: "Nombre y apellido de la persona adulta." },
+          email: { type: "string", description: "Correo electrónico, opcional." },
+          whatsapp: { type: "string", description: "WhatsApp con código de área." },
           twoGames: { type: "string", enum: ["Pelotero + Metegol", "Pelotero + Cama Elástica", "Metegol + Cama Elástica"] },
           singleGame: { type: "string", enum: gameOptions },
         },
@@ -159,8 +158,8 @@ export default function Home() {
       annotations: { readOnlyHint: false, untrustedContentHint: false },
       execute(input) {
         const values = input as Record<string, unknown>;
-        if (!validCombos.has(String(values.comboId)) || (values.paymentMethod && !validPayments.has(String(values.paymentMethod)))) {
-          throw new Error("Combo o medio de pago no válidos.");
+        if (!validCombos.has(String(values.comboId))) {
+          throw new Error("Combo no válido.");
         }
         setComboId(String(values.comboId));
         if (typeof values.date === "string") setDate(values.date);
@@ -170,7 +169,9 @@ export default function Home() {
           setSelectedLocation({ lat: Number(values.latitude), lng: Number(values.longitude) });
           setMapPointRef.current?.(Number(values.latitude), Number(values.longitude), true);
         }
-        if (typeof values.paymentMethod === "string") setPaymentMethod(values.paymentMethod);
+        if (typeof values.name === "string") setFullName(values.name);
+        if (typeof values.email === "string") setEmail(values.email);
+        if (typeof values.whatsapp === "string") setWhatsapp(values.whatsapp);
         if (typeof values.twoGames === "string") setTwoGames(values.twoGames);
         if (typeof values.singleGame === "string") setSingleGame(values.singleGame);
         document.querySelector("#combos")?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -234,25 +235,53 @@ export default function Home() {
     );
   };
 
-  const googleMapsLink = selectedLocation
-    ? `https://google.com/maps?q=${selectedLocation.lat},${selectedLocation.lng}`
-    : "";
-
-  const whatsappUrl = useMemo(() => {
-    const detail = comboId === "dos" ? ` (${twoGames})` : comboId === "uno" ? ` (${singleGame})` : "";
-    const message = [
-      "Hola, Inolvidable Kids 👋",
-      `Quiero consultar disponibilidad para ${combo.name}${detail}.`,
-      `Fecha: ${date || "a confirmar"}.`,
-      `Hora de inicio: ${eventTime || "a confirmar"}.`,
-      `Duración: ${durationHours} horas.`,
-      googleMapsLink ? `Ubicación del evento: ${googleMapsLink}.` : "Ubicación exacta: todavía no seleccionada.",
-      `Medio de pago preferido: ${paymentMethod}.`,
-      `Total estimado: ${formatPrice(total)}.`,
-      "El precio final, incluido el traslado si corresponde, se confirma antes del pago.",
-    ].filter(Boolean).join("\n");
-    return `${PLAIN_WHATSAPP_URL}?text=${encodeURIComponent(message)}`;
-  }, [combo.name, comboId, date, durationHours, eventTime, googleMapsLink, paymentMethod, singleGame, total, twoGames]);
+  const submitConsultation = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (submissionRef.current) return;
+    setSubmitError("");
+    if (!selectedLocation) {
+      setSubmitError("Marcá la ubicación exacta del evento antes de enviar.");
+      document.getElementById("mapa-evento")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    submissionRef.current = true;
+    setIsSubmitting(true);
+    try {
+      if (!draftIdRef.current) {
+        try { draftIdRef.current = sessionStorage.getItem(DRAFT_KEY) || ""; } catch { /* Storage can be disabled. */ }
+        draftIdRef.current ||= newConsultationId();
+        try { sessionStorage.setItem(DRAFT_KEY, draftIdRef.current); } catch { /* In-memory ID still prevents double submission. */ }
+      }
+      const input = validateConsultation({
+        idempotencyKey: draftIdRef.current, name: fullName, email, whatsapp,
+        comboId, games: comboGameLabel(comboId), eventDate: date, eventTime, durationHours,
+        latitude: selectedLocation.lat, longitude: selectedLocation.lng, marketingConsent,
+      });
+      const response = await fetch("/api/consultas", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...input, website }), signal: AbortSignal.timeout(20000),
+      });
+      const result = await response.json() as { receipt?: ConsultationReceipt; error?: string; resetDraft?: boolean };
+      if (!response.ok || !result.receipt) {
+        if (result.resetDraft) {
+          draftIdRef.current = "";
+          try { sessionStorage.removeItem(DRAFT_KEY); } catch { /* Storage can be disabled. */ }
+        }
+        throw new Error(result.error || "No pudimos guardar tu consulta. Intentá nuevamente.");
+      }
+      // Only the code travels in the URL; contact and location remain in this tab.
+      setSavedCode(result.receipt.code);
+      try {
+        sessionStorage.setItem(CONSULTATION_STORAGE_KEY, JSON.stringify(result.receipt));
+        sessionStorage.removeItem(DRAFT_KEY);
+      } catch { /* The confirmation also works with the code alone. */ }
+      window.location.assign(`/solicitud-enviada?codigo=${encodeURIComponent(result.receipt.code)}`);
+    } catch (error) {
+      setSubmitError(error instanceof DOMException ? "No pudimos confirmar la respuesta. Intentá otra vez: conservaremos el mismo código si ya se guardó." : error instanceof Error ? error.message : "No pudimos guardar tu consulta. Intentá nuevamente.");
+      submissionRef.current = false;
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <main>
@@ -291,7 +320,7 @@ export default function Home() {
       </section>
 
       <section className="booking-section" id="combos">
-        <div className="booking-card">
+        <form className="booking-card consultation-form" onSubmit={submitConsultation} aria-busy={isSubmitting}>
           <div className="booking-heading">
             <div><h2>¡Armá tu diversión!</h2><p>Elegí juegos, fecha y duración a tu gusto.</p></div>
           </div>
@@ -306,7 +335,6 @@ export default function Home() {
                   <span className="combo-content">
                     <span className="combo-topline"><strong>{item.name}</strong>{item.featured && <span className="popular">¡Más completo!</span>}</span>
                     <span className="combo-eyebrow">{comboGameLabel(item.id)}</span>
-                    <strong className="combo-price">{formatPrice(item.price)}</strong>
                   </span>
                 </label>
                 {comboId === item.id && item.id !== "completo" && (
@@ -326,20 +354,27 @@ export default function Home() {
               {durationOptions.map((option) => (
                 <label key={option.hours} className={`choice-pill ${durationHours === option.hours ? "selected" : ""}`}>
                   <RadioGroupItem value={String(option.hours)} />
-                  <span><strong>{option.hours} horas</strong><small className={option.hours > 3 ? "saving-label" : ""}>{option.label}</small></span>
+                  <span><strong>{option.hours} horas</strong></span>
                 </label>
               ))}
             </RadioGroup>
           </fieldset>
 
           <div className="form-grid event-grid event-grid-simple">
-            <label className="field-label"><span><CalendarDays /> Fecha del evento</span><input type="date" value={date} onChange={(event) => setDate(event.target.value)} /></label>
-            <label className="field-label"><span><Clock3 /> Hora de inicio</span><input type="time" value={eventTime} onChange={(event) => setEventTime(event.target.value)} /></label>
+            <label className="field-label"><span><CalendarDays /> Fecha del evento</span><input type="date" required min={minimumDate || undefined} value={date} onChange={(event) => setDate(event.target.value)} /></label>
+            <label className="field-label"><span><Clock3 /> Hora de inicio</span><input type="time" required value={eventTime} onChange={(event) => setEventTime(event.target.value)} /></label>
           </div>
+
+          <div className="form-grid contact-grid">
+            <label className="field-label">Nombre y apellido del adulto<input name="name" autoComplete="name" required minLength={3} maxLength={120} value={fullName} onChange={event => setFullName(event.target.value)} placeholder="Tu nombre completo" /></label>
+            <label className="field-label">Número de WhatsApp<input name="tel" type="tel" autoComplete="tel" inputMode="tel" required maxLength={25} value={whatsapp} onChange={event => setWhatsapp(event.target.value)} placeholder="Ej.: 3755 123456" /><small>Con código de área. Si es de otro país, incluí + y el código de país.</small></label>
+            <label className="field-label">Correo electrónico (opcional)<input name="email" type="email" autoComplete="email" maxLength={254} value={email} onChange={event => setEmail(event.target.value)} placeholder="nombre@correo.com" /></label>
+          </div>
+          <label className="consultation-honeypot" aria-hidden="true">Sitio web<input name="website" tabIndex={-1} autoComplete="off" value={website} onChange={event => setWebsite(event.target.value)} /></label>
 
           <section className="location-picker" id="mapa-evento" aria-labelledby="location-picker-title">
             <div className="location-picker-head">
-              <div><span className="map-label"><Navigation /> Ubicación exacta del evento</span><strong id="location-picker-title">Marcá el lugar en el mapa</strong></div>
+              <div><span className="map-label"><Navigation /> Ubicación exacta del evento</span><strong id="location-picker-title">Marcá el lugar en el mapa</strong><small>Si usás el GPS, comprobá que el punto sea el lugar del evento.</small></div>
               <button type="button" className="gps-button" onClick={useCurrentLocation}>📍 Usar mi ubicación actual (GPS)</button>
             </div>
             <div ref={mapContainerRef} className="event-map" aria-label="Mapa para elegir la ubicación exacta del evento" />
@@ -349,23 +384,15 @@ export default function Home() {
             </div>
           </section>
 
-          <fieldset className="choice-section payment-section">
-            <legend><CreditCard /> Medio de pago preferido</legend>
-            <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod} className="payment-options" aria-label="Medio de pago">
-              {paymentMethods.map((method) => (
-                <label key={method} className={`payment-option ${paymentMethod === method ? "selected" : ""}`}>
-                  <RadioGroupItem value={method} /> <span><strong>{method}</strong></span>
-                </label>
-              ))}
-            </RadioGroup>
-          </fieldset>
-
-          <div className="price-summary">
-            <div className="estimated-total"><span className="price-label">Total Estimado</span><small className={`price-benefit ${durationHours === 3 ? "included" : ""}`}>{priceBenefit}</small><strong>{formatPrice(total)}</strong></div>
+          <div className="consultation-consent">
+            <p>Usaremos tus datos para responder esta consulta y coordinar el servicio. Se guardan en Cloudflare y en una planilla privada de Google Sheets. <a href="/politica-de-privacidad" target="_blank" rel="noopener noreferrer">Ver política de privacidad</a>.</p>
+            <label><input type="checkbox" checked={marketingConsent} onChange={event => setMarketingConsent(event.target.checked)} /><span>Quiero recibir novedades y promociones de Inolvidable Kids por WhatsApp o correo. Es opcional y puedo darme de baja cuando quiera.</span></label>
           </div>
-          <Button asChild size="lg" className={`whatsapp-main ${selectedLocation ? "" : "location-required"}`}><a href={selectedLocation ? whatsappUrl : "#mapa-evento"} target={selectedLocation ? "_blank" : undefined} rel={selectedLocation ? "noreferrer" : undefined}><img src="/social-whatsapp-light.png" alt="" /> {selectedLocation ? "Consultar Disponibilidad" : "Seleccioná la ubicación para consultar"}</a></Button>
+          {submitError && <p className="consultation-error" role="alert">{submitError} <a href={PLAIN_WHATSAPP_URL} target="_blank" rel="noreferrer">Hablar por WhatsApp</a></p>}
+          {savedCode ? <a className="consultation-saved" href={`/solicitud-enviada?codigo=${encodeURIComponent(savedCode)}`}>Tu consulta {savedCode} se guardó. Ver confirmación →</a> : <Button type="submit" size="lg" disabled={isSubmitting} className="whatsapp-main"><MessageCircle aria-hidden="true" />{isSubmitting ? "Guardando tu consulta…" : "Consultar disponibilidad"}</Button>}
+          <p className="consultation-pending">La disponibilidad y el precio se confirman por WhatsApp. Enviar esta consulta no reserva la fecha.</p>
           <p className="booking-note"><span>Para eventos dentro de Colonia Alberdi, el traslado es gratis.</span><span>Para otras zonas, el flete se cotiza según la ubicación marcada.</span></p>
-        </div>
+        </form>
       </section>
 
       <section className="calendar-section" id="fechas">

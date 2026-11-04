@@ -206,7 +206,7 @@ export default function Home() {
         else markerRef.current = L.marker(point, { icon: pinIcon }).addTo(map);
         if (focus) map.setView(point, 16);
         setSelectedLocation({ lat: Number(lat.toFixed(6)), lng: Number(lng.toFixed(6)) });
-        setGeoStatus("Ubicación seleccionada. Podés moverla tocando otro punto del mapa.");
+        setGeoStatus("Ubicación seleccionada.\nPodés moverla tocando otro punto del mapa.");
       };
       map.on("click", (event) => setPoint(event.latlng.lat, event.latlng.lng));
       mapInstanceRef.current = map;
@@ -373,8 +373,8 @@ export default function Home() {
 
           <div className="form-grid contact-grid">
             <label className="field-label">Nombre y apellido del adulto<input name="name" autoComplete="name" required minLength={3} maxLength={120} value={fullName} onChange={event => setFullName(event.target.value)} placeholder="Tu nombre completo" /></label>
-            <label className="field-label">Número de WhatsApp<input name="tel" type="tel" autoComplete="tel" inputMode="tel" required maxLength={25} value={whatsapp} onChange={event => setWhatsapp(event.target.value)} placeholder="Ejemplo: 3755 12 34 56" /></label>
-            <label className="field-label">Correo electrónico (opcional)<input name="email" type="email" autoComplete="email" maxLength={254} value={email} onChange={event => setEmail(event.target.value)} placeholder="nombre@correo.com" /></label>
+            <label className="field-label">Número de WhatsApp<input name="tel" type="tel" autoComplete="tel" inputMode="tel" required maxLength={25} value={whatsapp} onChange={event => setWhatsapp(event.target.value)} placeholder="3755123456" /></label>
+            <label className="field-label">Correo electrónico (opcional)<input name="email" type="email" autoComplete="email" maxLength={254} value={email} onChange={event => setEmail(event.target.value)} placeholder="nombre@gmail.com" /></label>
           </div>
           <label className="consultation-honeypot" aria-hidden="true">Sitio web<input name="website" tabIndex={-1} autoComplete="off" value={website} onChange={event => setWebsite(event.target.value)} /></label>
 
@@ -391,10 +391,10 @@ export default function Home() {
           </section>
 
           <div className={`consultation-consent ${consentError ? "invalid" : ""}`}>
-            <label><input id="marketing-consent" type="checkbox" required checked={marketingConsent} aria-invalid={consentError} onInvalid={() => setConsentError(true)} onChange={event => { setMarketingConsent(event.target.checked); if (event.target.checked) setConsentError(false); }} /><span>Quiero recibir novedades y promociones de Inolvidable Kids por WhatsApp y Correo.</span></label>
+            <label><input id="marketing-consent" type="checkbox" required checked={marketingConsent} aria-invalid={consentError} onInvalid={() => setConsentError(true)} onChange={event => { setMarketingConsent(event.target.checked); if (event.target.checked) setConsentError(false); }} /><span>Quiero recibir novedades y promociones de Inolvidable Kids por los medios completados.</span></label>
           </div>
           {submitError && <p className="consultation-error" role="alert">{submitError} <a href={PLAIN_WHATSAPP_URL} target="_blank" rel="noreferrer">Hablar por WhatsApp</a></p>}
-          {savedCode ? <a className="consultation-saved" href={`/solicitud-enviada?codigo=${encodeURIComponent(savedCode)}`}>Tu consulta {savedCode} se guardó. Ver confirmación →</a> : <Button type="submit" size="lg" disabled={isSubmitting} className="whatsapp-main" onClick={() => setConsentError(!marketingConsent)}><MessageCircle aria-hidden="true" />{isSubmitting ? "Guardando tu consulta…" : "Consultar disponibilidad"}</Button>}
+          {savedCode ? <a className="consultation-saved" href={`/solicitud-enviada?codigo=${encodeURIComponent(savedCode)}`}>Tu consulta {savedCode} se guardó. Ver confirmación →</a> : <Button type="submit" size="lg" disabled={isSubmitting} className="whatsapp-main" onClick={() => setConsentError(!marketingConsent)}><MessageCircle aria-hidden="true" />{isSubmitting ? "Guardando tu consulta…" : "Enviar consulta"}</Button>}
         </form>
       </section>
 

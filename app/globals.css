@@ -380,6 +380,7 @@ footer { padding: 60px max(5vw, 24px) 28px; background: linear-gradient(180deg, 
 .legal-page > * { position: relative; z-index: 1; }
 @keyframes legal-orb-drift { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(6px, -10px, 0); } }
 .legal-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 76px; padding: 10px max(5vw, 24px); background: transparent; }
+.consultation-header { justify-content: center; }
 .legal-back { color: #005a46; font-size: .82rem; font-weight: 700; text-decoration: none; }
 .legal-back:hover, .legal-back:focus-visible { color: #0a7058; text-decoration: none; }
 .legal-hero { display: grid; min-height: 265px; place-items: center; padding: 56px 20px 75px; text-align: center; background: transparent; }

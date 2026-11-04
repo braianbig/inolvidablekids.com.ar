@@ -7,7 +7,13 @@ const links = [
   { href: "/terminos-y-condiciones", label: "Términos y condiciones" },
 ];
 
-export function LegalShell({ title, intro, children, className = "" }: { title: string; intro: string; children: ReactNode; className?: string }) {
+export function LegalShell({ title, intro, children, className = "", hideBackLink = false }: {
+  title: string;
+  intro: string;
+  children: ReactNode;
+  className?: string;
+  hideBackLink?: boolean;
+}) {
   return (
     <main className={`legal-page ${className}`.trim()}>
       <header className="legal-header">
@@ -15,7 +21,7 @@ export function LegalShell({ title, intro, children, className = "" }: { title: 
           <img src="/inolvidable-icon.png" alt="" className="brand-icon" />
           <span className="brand-name">Inolvidable</span><span className="brand-kids">KIDS</span>
         </a>
-        <a className="legal-back" href="/">Volver al inicio</a>
+        {!hideBackLink && <a className="legal-back" href="/">Volver al inicio</a>}
       </header>
       <section className="legal-hero">
         <div className="legal-hero-inner">

@@ -3,7 +3,7 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import type { Map as LeafletMap, Marker as LeafletMarker } from "leaflet";
-import { CalendarDays, Clock3, MessageCircle, Navigation } from "lucide-react";
+import { CalendarDays, Clock3, Navigation } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { argentinaToday, CONSULTATION_STORAGE_KEY, DRAFT_KEY, newConsultationId, validateConsultation, WHATSAPP_NUMBER } from "@/lib/consultation";
@@ -341,7 +341,7 @@ export function ConsultationForm({ standalone = false }: { standalone?: boolean 
           <label><input id="marketing-consent" type="checkbox" required checked={marketingConsent} aria-invalid={consentError} onInvalid={event => { event.preventDefault(); setConsentError(true); }} onChange={event => { setMarketingConsent(event.target.checked); if (event.target.checked) setConsentError(false); }} /><span>Acepto que quiero recibir novedades y promociones de Inolvidable Kids.</span></label>
         </div>
         {submitError && <p className="consultation-error" role="alert">{submitError} <a href={PLAIN_WHATSAPP_URL} target="_blank" rel="noreferrer">Hablar por WhatsApp</a></p>}
-        {savedCode ? <a className="consultation-saved" href={`/solicitud-enviada?codigo=${encodeURIComponent(savedCode)}`}>Tu consulta {savedCode} se guardó. Ver confirmación →</a> : <Button type="submit" size="lg" disabled={isSubmitting} className="whatsapp-main" onClick={event => { if (!marketingConsent) { event.preventDefault(); setConsentError(true); } }}><MessageCircle aria-hidden="true" />{isSubmitting ? "Guardando tu consulta…" : "Enviar consulta"}</Button>}
+        {savedCode ? <a className="consultation-saved" href={`/solicitud-enviada?codigo=${encodeURIComponent(savedCode)}`}>Tu consulta {savedCode} se guardó. Ver confirmación →</a> : <Button type="submit" size="lg" disabled={isSubmitting} className="whatsapp-main" onClick={event => { if (!marketingConsent) { event.preventDefault(); setConsentError(true); } }}>{isSubmitting ? "Guardando tu consulta…" : "Enviar consulta"}</Button>}
       </form>
     </section>
   );

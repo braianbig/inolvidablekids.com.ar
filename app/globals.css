@@ -95,7 +95,7 @@ h1, h2, h3, p { margin-top: 0; }
 .combo-radio { position: absolute; z-index: 2; top: 10px; left: 10px; width: 20px; height: 20px; border-color: #7da82b; background: rgb(255 255 255 / 92%); color: #005a46; }
 /* Keep the original image bounds as the reference for each requested increase. */
 .combo-gallery { --gallery-base-height: 226px; --gallery-old-x: 20px; --gallery-old-y: 20px; --gallery-old-gap: 8px; --gallery-count: 2; --gallery-fill: 1; --gallery-scale: .88; --gallery-growth: 1.25; container-type: inline-size; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; height: var(--gallery-base-height); min-width: 0; min-height: 0; align-items: center; justify-items: center; gap: 0; overflow: hidden; padding: 0; background: transparent; line-height: 0; }
-.combo-gallery.images-1 { --gallery-count: 1; --gallery-fill: .84; --gallery-scale: .94; --gallery-growth: 1.5; grid-template-columns: minmax(0, 1fr); height: calc(var(--gallery-base-height) * 1.25); }
+.combo-gallery.images-1 { --gallery-count: 1; --gallery-fill: .84; --gallery-scale: .94; --gallery-growth: 1.35; grid-template-columns: minmax(0, 1fr); height: var(--gallery-base-height); }
 .combo-gallery.images-3 { --gallery-old-x: 10px; --gallery-old-y: 14px; --gallery-old-gap: 5px; --gallery-count: 3; --gallery-scale: .96; --gallery-growth: 1.0395; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .combo-gallery img { display: block; width: auto; height: auto; max-width: min(100%, calc((100cqw - 2 * var(--gallery-old-x) - (var(--gallery-count) - 1) * var(--gallery-old-gap)) / var(--gallery-count) * var(--gallery-fill) * var(--gallery-scale) * var(--gallery-growth))); max-height: min(100%, calc((var(--gallery-base-height) - 2 * var(--gallery-old-y)) * var(--gallery-fill) * var(--gallery-scale) * var(--gallery-growth))); min-width: 0; min-height: 0; align-self: center; justify-self: center; object-fit: contain; object-position: center; filter: drop-shadow(0 13px 10px rgb(0 69 53 / 13%)); transition: max-width .25s ease, max-height .25s ease; }
 .combo-option:hover .combo-gallery, .combo-option.selected .combo-gallery { --gallery-scale: .93; }
@@ -127,7 +127,7 @@ h1, h2, h3, p { margin-top: 0; }
 .field-label input:focus, .field-label select:focus { border-color: #35a879; box-shadow: 0 0 0 3px rgb(53 168 121 / 12%); }
 .field-label > small { color: #71877f; font-size: .76rem; font-weight: 650; }
 .field-label span small { color: #71877f; font-weight: 700; }
-.consultation-form .combo-content { min-height: 95px; }
+.consultation-form .combo-content { min-height: 84px; padding: 14px 18px; }
 .contact-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .consultation-honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .consultation-consent { margin-top: 24px; padding: 18px; border-radius: 16px; background: #f4f8f5; color: #476a60; font-size: .85rem; line-height: 1.6; }

@@ -372,7 +372,7 @@ export default function Home() {
           </div>
 
           <div className="form-grid contact-grid">
-            <label className="field-label">Nombre y Apellido del adulto<input name="name" autoComplete="name" required pattern={"\\s*\\S+(?:\\s+\\S+)+\\s*"} title="Ingresá tu nombre y apellido." minLength={3} maxLength={120} value={fullName} onChange={event => setFullName(event.target.value)} placeholder="Tu nombre completo" /></label>
+            <label className="field-label">Nombre y Apellido<input name="name" autoComplete="name" required pattern={"\\s*\\S+(?:\\s+\\S+)+\\s*"} title="Ingresá tu nombre y apellido." minLength={3} maxLength={120} value={fullName} onChange={event => setFullName(event.target.value)} placeholder="Tu nombre completo" /></label>
             <label className="field-label">Número de WhatsApp<input name="tel" type="tel" autoComplete="tel" inputMode="tel" required maxLength={25} value={whatsapp} onChange={event => setWhatsapp(event.target.value)} placeholder="3755123456" /></label>
             <label className="field-label">Correo Electrónico<input name="email" type="email" autoComplete="email" required maxLength={254} value={email} onChange={event => setEmail(event.target.value)} placeholder="nombre@gmail.com" /></label>
           </div>

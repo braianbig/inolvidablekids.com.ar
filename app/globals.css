@@ -139,8 +139,8 @@ h1, h2, h3, p { margin-top: 0; }
 .consultation-consent input:checked { border-color: #005a46; background: #005a46; }
 .consultation-consent input:checked::after { display: block; }
 .consultation-consent input:focus-visible { outline: 2px solid #005a46; outline-offset: 3px; }
-.consultation-consent.invalid { color: #b42318; background: #fff5f3; box-shadow: inset 0 0 0 1px #e5a59b; }
-.consultation-consent.invalid input { border: 2px solid #b42318; }
+.consultation-consent.invalid { background: #fff5f3; box-shadow: inset 0 0 0 1px #e5a59b; }
+.consultation-consent.invalid input { border: 2px solid #e5a59b; outline: none; }
 .gps-hint-short { display: none; }
 .consultation-pending { margin: 14px 0 0; color: #55746b; font-size: .82rem; line-height: 1.5; text-align: center; }
 .consultation-error { padding: 14px 18px; margin: 18px 0 0; border: 1px solid #ecc0b8; border-radius: 14px; background: #fff7f5; color: #8a2a1d; line-height: 1.6; }
@@ -148,6 +148,8 @@ h1, h2, h3, p { margin-top: 0; }
 .consultation-form .whatsapp-main:disabled { opacity: .7; cursor: wait; }
 .location-picker-head small { max-width: 400px; color: #55746b; font-size: .78rem; line-height: 1.45; }
 .consultation-saved { display: block; margin-top: 20px; padding: 16px; border-radius: 14px; background: #e7f1d2; color: #005a46; font-weight: 850; overflow-wrap: anywhere; }
+.confirmation-page { --confirmation-copy-size: clamp(.9rem, 1.35vw, 1.03rem); }
+.confirmation-page .legal-hero p, .confirmation-page .confirmation-intro { font-size: var(--confirmation-copy-size); line-height: 1.55; white-space: normal; }
 .consultation-confirmation { max-width: 760px; margin-inline: auto; padding: clamp(24px, 5vw, 48px); text-align: center; }
 .confirmation-icon { display: grid; place-items: center; width: 70px; height: 70px; margin: 0 auto 20px; border-radius: 50%; background: #e7f1d2; color: #005a46; box-shadow: 0 0 0 9px #f5f9ed; }
 .confirmation-icon svg { width: 36px; height: 36px; }
@@ -165,17 +167,21 @@ h1, h2, h3, p { margin-top: 0; }
 .confirmation-details dd { margin: 0; color: #173f35; font-weight: 850; overflow-wrap: anywhere; }
 .confirmation-details dd small { display: block; margin-top: 5px; color: #688078; font-weight: 650; font-size: .78rem; }
 .confirmation-map { grid-column: 1 / -1; }
-.confirmation-map a { text-decoration: underline; text-underline-offset: 3px; }
+.confirmation-map a { text-decoration: none; }
 .confirmation-whatsapp { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 58px; padding: 14px 18px; white-space: normal; }
 .confirmation-whatsapp img { width: 23px; height: 23px; }
 .consultation-confirmation .confirmation-note { margin-top: 18px; font-size: .83rem; }
-.confirmation-home { display: inline-block; padding: 12px; color: #005a46; font-size: .88rem; font-weight: 850; }
+.confirmation-navigation { display: flex; justify-content: center; margin-top: 26px; }
+.confirmation-home { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 12px 22px; border: 1px solid #88b638; border-radius: 999px; background: #e7f1d2; color: #005a46; font-size: .88rem; font-weight: 850; text-decoration: none; }
+.confirmation-home:hover { background: #dcecbb; }
+.confirmation-home:focus-visible { outline: 2px solid #005a46; outline-offset: 3px; }
 @media (max-width: 700px) {
   .consultation-form .contact-grid { grid-template-columns: 1fr; }
   .gps-hint-full { display: none; }
   .gps-hint-short { display: inline; }
   .location-status small { white-space: pre-line; }
   .location-picker-head .gps-hint { max-width: none; white-space: nowrap; font-size: clamp(.64rem, 2.8vw, .78rem); }
+  .confirmation-page { --confirmation-copy-size: clamp(.78rem, 3.35vw, .9rem); }
   .confirmation-details { grid-template-columns: 1fr; gap: 16px; }
 }
 .location-picker { margin-top: 20px; padding: 18px; border: 1px solid #d4e3db; border-radius: 20px; background: #f4f8f5; }

@@ -7,9 +7,9 @@ const links = [
   { href: "/terminos-y-condiciones", label: "Términos y condiciones" },
 ];
 
-export function LegalShell({ title, intro, children }: { title: string; intro: string; children: ReactNode }) {
+export function LegalShell({ title, intro, children, className = "" }: { title: string; intro: string; children: ReactNode; className?: string }) {
   return (
-    <main className="legal-page">
+    <main className={`legal-page ${className}`.trim()}>
       <header className="legal-header">
         <a className="brand" href="/" aria-label="Inolvidable Kids, volver al inicio">
           <img src="/inolvidable-icon.png" alt="" className="brand-icon" />

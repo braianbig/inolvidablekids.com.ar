@@ -58,8 +58,8 @@ export function validateConsultation(body: unknown, today = argentinaToday()): C
     uno: ["Pelotero", "Metegol", "Cama Elástica"],
   };
   if (!/^[a-f0-9-]{36}$/i.test(idempotencyKey)) throw new Error("Actualizá la página e intentá nuevamente.");
-  if (name.length < 3 || name.length > 120 || /[\r\n\x00-\x1f]/.test(name)) throw new Error("Ingresá tu nombre y apellido.");
-  if (email.length > 254 || (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) throw new Error("Revisá tu correo electrónico.");
+  if (name.length < 3 || name.length > 120 || name.split(/\s+/).length < 2 || /[\r\n\x00-\x1f]/.test(name)) throw new Error("Ingresá tu nombre y apellido.");
+  if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error("Revisá tu correo electrónico.");
   if (!/^[+\d\s().-]+$/.test(rawPhone) || !/^\+[1-9]\d{9,14}$/.test(whatsapp)) throw new Error("Ingresá un WhatsApp válido con código de área.");
   if (!Object.hasOwn(gameChoices, comboId) || !gameChoices[comboId].includes(games)) throw new Error("Elegí los juegos de tu combo.");
   if (!/^\d{4}-\d{2}-\d{2}$/.test(eventDate) || !Number.isFinite(Date.parse(`${eventDate}T12:00:00Z`)) || new Date(`${eventDate}T12:00:00Z`).toISOString().slice(0, 10) !== eventDate || eventDate < today) throw new Error("Elegí una fecha válida, desde hoy en adelante.");
@@ -68,6 +68,10 @@ export function validateConsultation(body: unknown, today = argentinaToday()): C
   if (typeof b.latitude !== "number" || typeof b.longitude !== "number" || !Number.isFinite(b.latitude) || !Number.isFinite(b.longitude) || Math.abs(b.latitude) > 90 || Math.abs(b.longitude) > 180) throw new Error("Marcá la ubicación exacta del evento en el mapa.");
   if (typeof b.marketingConsent !== "boolean") throw new Error("Revisá la opción de promociones.");
   return { idempotencyKey, name, email, whatsapp, comboId: comboId as ConsultationInput["comboId"], games, eventDate, eventTime, durationHours: b.durationHours, latitude: b.latitude, longitude: b.longitude, marketingConsent: b.marketingConsent };
+}
+
+export function isConsultationCode(value: string) {
+  return /^IK-(?:\d{4}|\d{8}-[A-F0-9]{20})$/.test(value);
 }
 
 export function comboLabel(comboId: string, games: string) {

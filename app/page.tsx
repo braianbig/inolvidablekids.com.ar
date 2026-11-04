@@ -24,8 +24,8 @@ const gameImages: Record<string, { src: string; alt: string }> = {
 };
 
 const combos = [
-  { id: "completo", name: "Combo completo", eyebrow: "Los tres juegos", featured: true },
-  { id: "dos", name: "Combo dúo", eyebrow: "Elegí tus favoritos" },
+  { id: "completo", name: "Combo Completo", eyebrow: "Los tres juegos", featured: true },
+  { id: "dos", name: "Combo Dúo", eyebrow: "Elegí tus favoritos" },
   { id: "uno", name: "Un juego", eyebrow: "Elegí el que quieras" },
 ];
 
@@ -148,7 +148,7 @@ export default function Home() {
           latitude: { type: "number", description: "Latitud exacta del evento." },
           longitude: { type: "number", description: "Longitud exacta del evento." },
           name: { type: "string", description: "Nombre y apellido de la persona adulta." },
-          email: { type: "string", description: "Correo electrónico, opcional." },
+          email: { type: "string", description: "Correo Electrónico obligatorio." },
           whatsapp: { type: "string", description: "WhatsApp con código de área." },
           twoGames: { type: "string", enum: ["Pelotero + Metegol", "Pelotero + Cama Elástica", "Metegol + Cama Elástica"] },
           singleGame: { type: "string", enum: gameOptions },
@@ -372,9 +372,9 @@ export default function Home() {
           </div>
 
           <div className="form-grid contact-grid">
-            <label className="field-label">Nombre y apellido del adulto<input name="name" autoComplete="name" required minLength={3} maxLength={120} value={fullName} onChange={event => setFullName(event.target.value)} placeholder="Tu nombre completo" /></label>
+            <label className="field-label">Nombre y Apellido del adulto<input name="name" autoComplete="name" required pattern={"\\s*\\S+(?:\\s+\\S+)+\\s*"} title="Ingresá tu nombre y apellido." minLength={3} maxLength={120} value={fullName} onChange={event => setFullName(event.target.value)} placeholder="Tu nombre completo" /></label>
             <label className="field-label">Número de WhatsApp<input name="tel" type="tel" autoComplete="tel" inputMode="tel" required maxLength={25} value={whatsapp} onChange={event => setWhatsapp(event.target.value)} placeholder="3755123456" /></label>
-            <label className="field-label">Correo electrónico (opcional)<input name="email" type="email" autoComplete="email" maxLength={254} value={email} onChange={event => setEmail(event.target.value)} placeholder="nombre@gmail.com" /></label>
+            <label className="field-label">Correo Electrónico<input name="email" type="email" autoComplete="email" required maxLength={254} value={email} onChange={event => setEmail(event.target.value)} placeholder="nombre@gmail.com" /></label>
           </div>
           <label className="consultation-honeypot" aria-hidden="true">Sitio web<input name="website" tabIndex={-1} autoComplete="off" value={website} onChange={event => setWebsite(event.target.value)} /></label>
 

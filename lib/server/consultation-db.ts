@@ -26,6 +26,8 @@ export async function ensureConsultationSchema(db: D1Database) {
         sheets_sync_attempts INTEGER NOT NULL DEFAULT 0, sheets_synced_at TEXT, sheets_last_error TEXT,
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
       )`),
+      db.prepare("CREATE TABLE IF NOT EXISTS consultation_code_sequence (name TEXT PRIMARY KEY, value INTEGER NOT NULL CHECK(value BETWEEN 0 AND 9999))"),
+      db.prepare("INSERT INTO consultation_code_sequence(name,value) SELECT 'consultations', COALESCE(MAX(CAST(substr(code,4) AS INTEGER)),0) FROM consultation_requests WHERE code GLOB 'IK-[0-9][0-9][0-9][0-9]' ON CONFLICT(name) DO UPDATE SET value=MAX(consultation_code_sequence.value,excluded.value)"),
       db.prepare("CREATE INDEX IF NOT EXISTS idx_consultation_requests_sync ON consultation_requests(sheets_sync_status, created_at)"),
       db.prepare("CREATE TABLE IF NOT EXISTS consultation_sync_lock (name TEXT PRIMARY KEY, owner TEXT NOT NULL, expires_at INTEGER NOT NULL)"),
       db.prepare("CREATE TABLE IF NOT EXISTS consultation_sheet_rows (code TEXT NOT NULL, spreadsheet_id TEXT NOT NULL, row_number INTEGER NOT NULL, PRIMARY KEY(code, spreadsheet_id), UNIQUE(spreadsheet_id, row_number))"),
@@ -34,6 +36,12 @@ export async function ensureConsultationSchema(db: D1Database) {
     ready.set(db, promise);
   }
   await promise;
+}
+
+// Atomic allocation keeps concurrent inquiries distinct; numbers are never recycled.
+export async function nextConsultationCode(db: D1Database): Promise<string | null> {
+  const sequence = await db.prepare("UPDATE consultation_code_sequence SET value=value+1 WHERE name='consultations' AND value<9999 RETURNING value").first<{ value: number }>();
+  return sequence ? "IK-" + String(sequence.value).padStart(4, "0") : null;
 }
 
 export function receiptFromRow(row: ConsultationRow): ConsultationReceipt {

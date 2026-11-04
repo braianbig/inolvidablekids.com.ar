@@ -3,8 +3,8 @@ import { DatabaseSync } from "node:sqlite";
 import { test } from "node:test";
 import { POST } from "../app/api/consultas/route";
 import { env, jobs } from "./cloudflare-stub";
-import { validateConsultation, consultationWhatsapp, type ConsultationInput } from "../lib/consultation";
-import { ensureConsultationSchema, receiptFromRow, type ConsultationRow } from "../lib/server/consultation-db";
+import { validateConsultation, isConsultationCode, consultationWhatsapp, type ConsultationInput } from "../lib/consultation";
+import { ensureConsultationSchema, nextConsultationCode, receiptFromRow, type ConsultationRow } from "../lib/server/consultation-db";
 import { syncPendingConsultations } from "../lib/server/google-sheets";
 
 class LocalD1 {
@@ -69,12 +69,22 @@ test("consultations survive Sheets errors; retries preserve a single row and man
     assert.throws(() => validateConsultation({ ...input, eventDate: "2027-02-30" }, "2026-01-01"));
     assert.throws(() => validateConsultation({ ...input, latitude: null }, "2026-01-01"));
     assert.throws(() => validateConsultation({ ...input, games: "Not a game" }, "2026-01-01"));
+    assert.throws(() => validateConsultation({ ...input, name: "" }, "2026-01-01"), /nombre y apellido/);
+    assert.throws(() => validateConsultation({ ...input, name: "Ana" }, "2026-01-01"), /nombre y apellido/);
+    assert.throws(() => validateConsultation({ ...input, email: "" }, "2026-01-01"), /correo/);
+    assert.throws(() => validateConsultation({ ...input, email: "nombre@" }, "2026-01-01"), /correo/);
+    assert.throws(() => validateConsultation({ ...input, whatsapp: "" }, "2026-01-01"), /WhatsApp/);
     const request = (body: unknown, origin = "https://example.test") => new Request("https://example.test/api/consultas", { method: "POST", headers: { "Content-Type": "application/json", Origin: origin }, body: JSON.stringify(body) });
     assert.equal((await POST(request(input, "https://evil.test"))).status, 403);
     assert.equal((await POST(request({ ...input, website: "bot" }))).status, 400);
+    assert.equal((await POST(request({ ...input, email: "" }))).status, 400);
+    assert.equal((await POST(request({ ...input, name: "Ana" }))).status, 400);
+    assert.equal((await POST(request({ ...input, whatsapp: "" }))).status, 400);
+    assert.equal(db.sql.prepare("SELECT count(*) AS n FROM consultation_requests").get()!.n, 0);
     const response = await POST(request(input));
     assert.equal(response.status, 201);
     const { receipt } = await response.json() as { receipt: { code: string } };
+    assert.equal(receipt.code, "IK-0001");
     await drain();
     assert.equal((db.sql.prepare("SELECT sheets_sync_status FROM consultation_requests").get() as { sheets_sync_status: string }).sheets_sync_status, "error");
     assert.equal((await POST(request(input))).status, 201);
@@ -112,4 +122,28 @@ test("consultations survive Sheets errors; retries preserve a single row and man
     globalThis.fetch = realFetch;
     db.sql.close();
   }
+});
+
+test("short consultation codes remain unique under concurrent allocation and never wrap", async () => {
+  const db = new LocalD1();
+  const handle = db as unknown as D1Database;
+  try {
+    await ensureConsultationSchema(handle);
+    const codes = await Promise.all(Array.from({ length: 50 }, () => nextConsultationCode(handle)));
+    assert.equal(codes[0], "IK-0001");
+    assert.equal(codes[49], "IK-0050");
+    assert.equal(new Set(codes).size, 50);
+    assert.ok(codes.every(code => code && /^IK-\d{4}$/.test(code)));
+    db.sql.exec("UPDATE consultation_code_sequence SET value=9998");
+    assert.equal(await nextConsultationCode(handle), "IK-9999");
+    assert.equal(await nextConsultationCode(handle), null);
+    assert.equal(await nextConsultationCode(handle), null);
+  } finally { db.sql.close(); }
+});
+
+test("confirmation accepts short codes and existing legacy links", () => {
+  assert.ok(isConsultationCode("IK-0001"));
+  assert.ok(isConsultationCode("IK-9999"));
+  assert.ok(isConsultationCode("IK-20261103-0123456789ABCDEF0123"));
+  for (const code of ["IK-123", "IK-12345", "IK-ABCD", "IK-1234extra"]) assert.equal(isConsultationCode(code), false);
 });

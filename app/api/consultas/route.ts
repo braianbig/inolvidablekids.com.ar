@@ -1,6 +1,6 @@
 import { env, waitUntil } from "cloudflare:workers";
 import { validateConsultation } from "@/lib/consultation";
-import { allowConsultation, ensureConsultationSchema, receiptFromRow, type ConsultationRow } from "@/lib/server/consultation-db";
+import { allowConsultation, nextConsultationCode, ensureConsultationSchema, receiptFromRow, type ConsultationRow } from "@/lib/server/consultation-db";
 import { syncPendingConsultations } from "@/lib/server/google-sheets";
 
 const json = (body: object, status = 200) => Response.json(body, { status, headers: { "Cache-Control": "no-store" } });
@@ -27,7 +27,8 @@ export async function POST(request: Request) {
     let row = await db.prepare("SELECT * FROM consultation_requests WHERE idempotency_key=?").bind(input.idempotencyKey).first<ConsultationRow>();
     if (!row) {
       if (!await allowConsultation(db, request.headers.get("CF-Connecting-IP") ?? "local-preview")) return json({ error: "Recibimos varias consultas seguidas. Esperá unos minutos o escribinos por WhatsApp." }, 429);
-      const code = `IK-${new Date().toISOString().slice(0, 10).replaceAll("-", "")}-${crypto.randomUUID().replaceAll("-", "").slice(0, 20).toUpperCase()}`;
+      const code = await nextConsultationCode(db);
+      if (!code) return json({ error: "No pudimos generar un nuevo código. Escribinos por WhatsApp para recibir tu consulta." }, 503);
       const mapsUrl = `https://www.google.com/maps?q=${input.latitude},${input.longitude}`;
       await db.prepare(`INSERT INTO consultation_requests
         (code,idempotency_key,name,email,whatsapp,combo_id,games,event_date,event_time,duration_hours,latitude,longitude,maps_url,marketing_consent,marketing_consent_at)

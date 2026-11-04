@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function SolicitudEnviada() {
-  return <LegalShell title="¡Un paso más cerca de la diversión!" intro="Tu festejo empieza con una buena charla.">
+  return <LegalShell title="Un paso menos" intro="Tu festejo empieza con una buena charla.">
     <ConsultationConfirmation />
   </LegalShell>;
 }

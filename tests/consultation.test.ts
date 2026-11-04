@@ -96,7 +96,7 @@ test("consultations survive Sheets errors; retries preserve a single row and man
     assert.equal(sheet[2][7], (15 * 60 + 30) / 1440);
     assert.equal(sheet[2][8], "Combo dúo");
     assert.equal(sheet[2][13], "No");
-    assert.ok(String(sheet[2][14]).includes("https://www.google.com/maps?q=-27.36,-55.23"));
+    assert.equal(sheet[2][14], "https://www.google.com/maps?q=-27.36,-55.23");
     const saved = db.sql.prepare("SELECT * FROM consultation_requests").get() as unknown as ConsultationRow;
     assert.equal(saved.sheets_sync_status, "synced");
     assert.ok(decodeURIComponent(consultationWhatsapp(receiptFromRow(saved))).includes(receipt.code));

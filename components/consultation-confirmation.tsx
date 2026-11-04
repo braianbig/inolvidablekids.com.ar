@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { CalendarDays, Check, Clock3, Copy, MapPin } from "lucide-react";
-import { CONSULTATION_STORAGE_KEY, comboLabel, consultationWhatsapp, type ConsultationReceipt, WHATSAPP_NUMBER } from "@/lib/consultation";
+import { CONSULTATION_STORAGE_KEY, isConsultationCode, comboLabel, consultationWhatsapp, type ConsultationReceipt, WHATSAPP_NUMBER } from "@/lib/consultation";
 
 export function ConsultationConfirmation() {
   const [receipt, setReceipt] = useState<ConsultationReceipt | null>(null);
@@ -11,7 +11,7 @@ export function ConsultationConfirmation() {
   const [ready, setReady] = useState(false);
   useEffect(() => {
     const requestedCode = new URLSearchParams(window.location.search).get("codigo") ?? "";
-    const validCode = /^IK-\d{8}-[A-F0-9]{20}$/.test(requestedCode) ? requestedCode : "";
+    const validCode = isConsultationCode(requestedCode) ? requestedCode : "";
     setCode(validCode);
     try {
       const stored = sessionStorage.getItem(CONSULTATION_STORAGE_KEY);

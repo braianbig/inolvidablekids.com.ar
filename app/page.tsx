@@ -391,10 +391,10 @@ export default function Home() {
           </section>
 
           <div className={`consultation-consent ${consentError ? "invalid" : ""}`}>
-            <label><input id="marketing-consent" type="checkbox" required checked={marketingConsent} aria-invalid={consentError} onInvalid={() => setConsentError(true)} onChange={event => { setMarketingConsent(event.target.checked); if (event.target.checked) setConsentError(false); }} /><span>Acepto que quiero recibir novedades y promociones de Inolvidable Kids.</span></label>
+            <label><input id="marketing-consent" type="checkbox" required checked={marketingConsent} aria-invalid={consentError} onInvalid={event => { event.preventDefault(); setConsentError(true); }} onChange={event => { setMarketingConsent(event.target.checked); if (event.target.checked) setConsentError(false); }} /><span>Acepto que quiero recibir novedades y promociones de Inolvidable Kids.</span></label>
           </div>
           {submitError && <p className="consultation-error" role="alert">{submitError} <a href={PLAIN_WHATSAPP_URL} target="_blank" rel="noreferrer">Hablar por WhatsApp</a></p>}
-          {savedCode ? <a className="consultation-saved" href={`/solicitud-enviada?codigo=${encodeURIComponent(savedCode)}`}>Tu consulta {savedCode} se guardó. Ver confirmación →</a> : <Button type="submit" size="lg" disabled={isSubmitting} className="whatsapp-main" onClick={() => setConsentError(!marketingConsent)}><MessageCircle aria-hidden="true" />{isSubmitting ? "Guardando tu consulta…" : "Enviar consulta"}</Button>}
+          {savedCode ? <a className="consultation-saved" href={`/solicitud-enviada?codigo=${encodeURIComponent(savedCode)}`}>Tu consulta {savedCode} se guardó. Ver confirmación →</a> : <Button type="submit" size="lg" disabled={isSubmitting} className="whatsapp-main" onClick={event => { if (!marketingConsent) { event.preventDefault(); setConsentError(true); } }}><MessageCircle aria-hidden="true" />{isSubmitting ? "Guardando tu consulta…" : "Enviar consulta"}</Button>}
         </form>
       </section>
 

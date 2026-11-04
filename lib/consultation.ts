@@ -71,7 +71,7 @@ export function validateConsultation(body: unknown, today = argentinaToday()): C
 }
 
 export function isConsultationCode(value: string) {
-  return /^IK-(?:\d{4}|\d{8}-[A-F0-9]{20})$/.test(value);
+  return /^IK(?:\d{4}|-\d{4}|-\d{8}-[A-F0-9]{20})$/.test(value);
 }
 
 export function comboLabel(comboId: string, games: string) {

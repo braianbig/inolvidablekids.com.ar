@@ -27,11 +27,18 @@ export async function ensureConsultationSchema(db: D1Database) {
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
       )`),
       db.prepare("CREATE TABLE IF NOT EXISTS consultation_code_sequence (name TEXT PRIMARY KEY, value INTEGER NOT NULL CHECK(value BETWEEN 0 AND 9999))"),
-      db.prepare("INSERT INTO consultation_code_sequence(name,value) SELECT 'consultations', COALESCE(MAX(CAST(substr(code,4) AS INTEGER)),0) FROM consultation_requests WHERE code GLOB 'IK-[0-9][0-9][0-9][0-9]' ON CONFLICT(name) DO UPDATE SET value=MAX(consultation_code_sequence.value,excluded.value)"),
+      db.prepare("INSERT INTO consultation_code_sequence(name,value) SELECT 'consultations', COALESCE(MAX(CAST(CASE WHEN code GLOB 'IK[0-9][0-9][0-9][0-9]' THEN substr(code,3) ELSE substr(code,4) END AS INTEGER)),0) FROM consultation_requests WHERE code GLOB 'IK[0-9][0-9][0-9][0-9]' OR code GLOB 'IK-[0-9][0-9][0-9][0-9]' ON CONFLICT(name) DO UPDATE SET value=MAX(consultation_code_sequence.value,excluded.value)"),
       db.prepare("CREATE INDEX IF NOT EXISTS idx_consultation_requests_sync ON consultation_requests(sheets_sync_status, created_at)"),
       db.prepare("CREATE TABLE IF NOT EXISTS consultation_sync_lock (name TEXT PRIMARY KEY, owner TEXT NOT NULL, expires_at INTEGER NOT NULL)"),
       db.prepare("CREATE TABLE IF NOT EXISTS consultation_sheet_rows (code TEXT NOT NULL, spreadsheet_id TEXT NOT NULL, row_number INTEGER NOT NULL, PRIMARY KEY(code, spreadsheet_id), UNIQUE(spreadsheet_id, row_number))"),
       db.prepare("CREATE TABLE IF NOT EXISTS consultation_rate_limits (key TEXT PRIMARY KEY, count INTEGER NOT NULL, expires_at INTEGER NOT NULL)"),
+      // One-time launch reset requested after deleting test inquiries.
+      // D1 executes this ordered batch atomically. A populated database is never reset.
+      db.prepare("CREATE TABLE IF NOT EXISTS consultation_maintenance (name TEXT PRIMARY KEY, result TEXT NOT NULL, completed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)"),
+      db.prepare("DELETE FROM consultation_sheet_rows WHERE NOT EXISTS (SELECT 1 FROM consultation_requests) AND NOT EXISTS (SELECT 1 FROM consultation_maintenance WHERE name='launch-reset-v1')"),
+      db.prepare("UPDATE consultation_code_sequence SET value=0 WHERE name='consultations' AND NOT EXISTS (SELECT 1 FROM consultation_requests) AND NOT EXISTS (SELECT 1 FROM consultation_maintenance WHERE name='launch-reset-v1')"),
+      db.prepare("DELETE FROM sqlite_sequence WHERE name='consultation_requests' AND NOT EXISTS (SELECT 1 FROM consultation_requests) AND NOT EXISTS (SELECT 1 FROM consultation_maintenance WHERE name='launch-reset-v1')"),
+      db.prepare("INSERT OR IGNORE INTO consultation_maintenance(name,result) SELECT 'launch-reset-v1', CASE WHEN EXISTS (SELECT 1 FROM consultation_requests) THEN 'skipped_nonempty' ELSE 'reset_empty' END"),
     ]).catch(error => { ready.delete(db); throw error; });
     ready.set(db, promise);
   }
@@ -41,7 +48,7 @@ export async function ensureConsultationSchema(db: D1Database) {
 // Atomic allocation keeps concurrent inquiries distinct; numbers are never recycled.
 export async function nextConsultationCode(db: D1Database): Promise<string | null> {
   const sequence = await db.prepare("UPDATE consultation_code_sequence SET value=value+1 WHERE name='consultations' AND value<9999 RETURNING value").first<{ value: number }>();
-  return sequence ? "IK-" + String(sequence.value).padStart(4, "0") : null;
+  return sequence ? "IK" + String(sequence.value).padStart(4, "0") : null;
 }
 
 export function receiptFromRow(row: ConsultationRow): ConsultationReceipt {

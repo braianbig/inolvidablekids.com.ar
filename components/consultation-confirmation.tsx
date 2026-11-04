@@ -42,6 +42,6 @@ export function ConsultationConfirmation() {
       <p className="confirmation-note">Tu consulta está registrada.<br />¡Muy pronto te responderemos!</p>
     </> : ready && <p>Para consultar disponibilidad, elegí tus juegos y completá el formulario.</p>}
   </article>
-    <div className="confirmation-navigation"><a className="confirmation-home" href="/#combos">← Volver a los juegos</a></div>
+    <div className="confirmation-navigation"><a className="confirmation-home" href="/">Volver al inicio</a></div>
   </>;
 }

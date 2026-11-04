@@ -82,7 +82,7 @@ h1, h2, h3, p { margin-top: 0; }
 .booking-heading { display: flex; justify-content: space-between; gap: 20px; align-items: start; margin-bottom: 22px; }
 .section-kicker { display: block; margin-bottom: 9px; color: #79a928; font-size: .74rem; font-weight: 950; letter-spacing: .13em; text-transform: uppercase; }
 .booking-kicker { color: #79a928; }
-.booking-heading h2 { margin: 0; color: #005a46; font-size: 1.8rem; letter-spacing: -.04em; }
+.booking-heading :is(h1, h2) { margin: 0; color: #005a46; font-size: 1.8rem; letter-spacing: -.04em; }
 .booking-heading p { margin: 7px 0 0; color: #6a817a; font-size: .9rem; }
 .duration { display: inline-flex; align-items: center; gap: 6px; padding: 7px 10px; border-radius: 99px; background: #edf5e2; color: #41631b; font-size: .78rem; font-weight: 900; }
 .duration svg { width: 15px; }
@@ -172,8 +172,8 @@ h1, h2, h3, p { margin-top: 0; }
 .confirmation-whatsapp img { width: 23px; height: 23px; }
 .consultation-confirmation .confirmation-note { margin-top: 18px; font-size: .83rem; }
 .confirmation-navigation { display: flex; justify-content: center; margin-top: 26px; }
-.confirmation-home { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 12px 22px; border: 1px solid #88b638; border-radius: 999px; background: #e7f1d2; color: #005a46; font-size: .88rem; font-weight: 850; text-decoration: none; }
-.confirmation-home:hover { background: #dcecbb; }
+.confirmation-home { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 12px 22px; border: 1px solid var(--primary); border-radius: 999px; background: var(--primary); color: var(--accent); font-size: .88rem; font-weight: 850; text-decoration: none; }
+.confirmation-home:hover { background: #004a3a; }
 .confirmation-home:focus-visible { outline: 2px solid #005a46; outline-offset: 3px; }
 @media (max-width: 700px) {
   .consultation-form .contact-grid { grid-template-columns: 1fr; }
@@ -440,5 +440,5 @@ footer { padding: 60px max(5vw, 24px) 28px; background: linear-gradient(180deg, 
 }
 
 .booking-card { padding-top: clamp(16px, 2.8vw, 36px); }
-.booking-heading h2 { font-weight: 900; }
+.booking-heading :is(h1, h2) { font-weight: 900; }
 @media (max-width: 700px) { .booking-card { padding-top: 14px; } }

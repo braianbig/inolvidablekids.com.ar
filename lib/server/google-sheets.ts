@@ -35,7 +35,7 @@ export function sheetValues(row: ConsultationRow): (string | number)[] {
   const created = new Date(`${row.created_at.replace(" ", "T").replace(/Z$/, "")}Z`);
   const createdDate = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Argentina/Buenos_Aires", year: "numeric", month: "2-digit", day: "2-digit" }).format(created);
   const [hour, minute] = row.event_time.split(":").map(Number);
-  return [row.code, serialDate(createdDate), row.name, row.whatsapp, row.email ?? "", row.locality || "Ver ubicación en Observaciones", serialDate(row.event_date), (hour * 60 + minute) / 1440, comboLabel(row.combo_id, row.games), row.duration_hours, "Nueva", "Web", "", row.marketing_consent ? "Sí" : "No", `Juegos: ${row.games}. Ubicación del evento: ${row.maps_url}`];
+  return [row.code, serialDate(createdDate), row.name, row.whatsapp, row.email ?? "", row.locality || "Ver ubicación en Observaciones", serialDate(row.event_date), (hour * 60 + minute) / 1440, comboLabel(row.combo_id, row.games), row.duration_hours, "Nueva", "Web", "", row.marketing_consent ? "Sí" : "No", row.maps_url];
 }
 
 export async function syncPendingConsultations(env: SyncEnv) {

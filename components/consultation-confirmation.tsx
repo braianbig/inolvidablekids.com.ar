@@ -39,7 +39,7 @@ export function ConsultationConfirmation() {
         <div className="confirmation-map"><dt><MapPin aria-hidden="true" /> Lugar del evento</dt><dd><a href={receipt.mapsUrl} target="_blank" rel="noopener noreferrer">Ver ubicación en Google Maps ↗</a></dd></div>
       </dl>}
       <a className="whatsapp-main confirmation-whatsapp" href={whatsapp} target="_blank" rel="noopener noreferrer"><img src="/social-whatsapp-light.png" alt="" />Continuar por WhatsApp</a>
-      <p className="confirmation-note">Tu consulta está registrada. La fecha queda pendiente de confirmación; todavía no es una reserva.</p>
+      <p className="confirmation-note">Tu consulta está registrada.<br />Te responderemos en breve.</p>
     </> : ready && <p>Para consultar disponibilidad, elegí tus juegos y completá el formulario.</p>}
     <a className="confirmation-home" href="/#combos">Volver a los juegos →</a>
   </article>;

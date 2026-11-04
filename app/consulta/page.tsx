@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function ConsultaPage() {
   return (
     <main>
-      <header className="legal-header">
+      <header className="legal-header consultation-header">
         <a className="brand" href="/" aria-label="Inolvidable Kids, volver al inicio">
           <img src="/inolvidable-icon.png" alt="" className="brand-icon" />
           <span className="brand-name">Inolvidable</span><span className="brand-kids">KIDS</span>

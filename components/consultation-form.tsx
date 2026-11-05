@@ -41,6 +41,8 @@ export function ConsultationForm({ standalone = false }: { standalone?: boolean 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
+  const [privacyRead, setPrivacyRead] = useState(false);
+  const [privacyError, setPrivacyError] = useState(false);
   const [marketingConsent, setMarketingConsent] = useState(false);
   const [website, setWebsite] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -331,8 +333,10 @@ export function ConsultationForm({ standalone = false }: { standalone?: boolean 
           </div>
         </section>
 
-        <div className="consultation-consent">
+        <div className={`consultation-consent${privacyError ? " invalid" : ""}`}>
           <p>Usaremos tus datos para registrar y responder esta consulta, según nuestra <a href="/politica-de-privacidad" target="_blank" rel="noopener noreferrer">Política de privacidad</a>.</p>
+          <label><input type="checkbox" required checked={privacyRead} aria-invalid={privacyError} aria-describedby={privacyError ? "privacy-confirmation-error" : undefined} onInvalid={event => { event.preventDefault(); setPrivacyError(true); event.currentTarget.focus(); }} onChange={event => { setPrivacyRead(event.target.checked); if (event.target.checked) setPrivacyError(false); }} /><span>Leí el aviso de privacidad.</span></label>
+          {privacyError && <p id="privacy-confirmation-error" className="privacy-confirmation-error" role="alert">Marcá esta casilla para confirmar que leíste el aviso de privacidad.</p>}
           <label><input id="marketing-consent" type="checkbox" checked={marketingConsent} onChange={event => setMarketingConsent(event.target.checked)} /><span>Quiero recibir novedades y promociones de Inolvidable Kids. Esta opción es voluntaria y puedo darme de baja cuando quiera.</span></label>
         </div>
         {submitError && <p className="consultation-error" role="alert">{submitError} <a href={PLAIN_WHATSAPP_URL} target="_blank" rel="noreferrer">Hablar por WhatsApp</a></p>}

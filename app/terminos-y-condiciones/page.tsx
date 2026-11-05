@@ -4,9 +4,9 @@ import { LegalShell } from "@/components/legal-shell";
 export const metadata: Metadata = { title: "Términos y condiciones | Inolvidable Kids" };
 
 export default function Terminos() {
-  return <LegalShell title="Términos y condiciones" intro="Condiciones claras para tu festejo.">
+  return <LegalShell title="Términos y condiciones">
     <article className="legal-card legal-article">
-      <p className="legal-updated">Última actualización: 12 de octubre de 2026</p>
+      <p className="legal-updated">Última actualización: 5 de noviembre de 2026</p>
       <section><h2>1. ¿Quién presta el servicio?</h2>
         <p>Inolvidable Kids es una marca cuya solicitud de registro se encuentra en trámite ante el <strong>Instituto Nacional de la Propiedad Industrial (INPI)</strong>. El servicio es prestado por <strong>Braian Omar Bigalke</strong>, CUIT <strong>20-45390506-4</strong>, con domicilio en <strong>Avenida Uruguay, Lote 23° Secc. 3°, Colonia Alberdi, Misiones, Argentina</strong>.</p>
         <p>Para consultas, cambios, cancelaciones o reclamos, podés escribir a <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=inolvidablekids%40gmail.com" target="_blank" rel="noopener noreferrer">inolvidablekids@gmail.com</a> o comunicarte al <a href="tel:+543755639300">3755639300</a>. El área responsable es atención al cliente de Inolvidable Kids. Atendemos de lunes a viernes, de 8:00 a 18:00 (hora de Argentina); sábados y domingos, por cita previa. Las solicitudes mediante los formularios del sitio pueden enviarse en cualquier momento.</p>
@@ -21,40 +21,46 @@ export default function Terminos() {
         <p>El traslado dentro de <strong>Colonia Alberdi</strong> está incluido cuando así se informe en la oferta. Para <strong>General Alvear, Oberá y otras localidades</strong>, el costo y la posibilidad de prestar el servicio se confirmarán antes de que realices el pago.</p>
         <p>Consultar el calendario, completar el formulario o enviar un mensaje <strong>no bloquea por sí solo una fecha</strong>. La disponibilidad será confirmada expresamente por Inolvidable Kids.</p>
       </section>
-      <section><h2>4. ¿Cómo confirmar la fecha?</h2>
+      <section><h2>4. ¿Cómo funciona la consulta web?</h2>
+        <p>Para solicitar disponibilidad, una persona adulta debe indicar su nombre y apellido, número de WhatsApp, correo electrónico, juegos elegidos, fecha, hora, duración y ubicación exacta del evento. Al enviarlo, el sistema genera un código de consulta que permite localizar la solicitud y continuar la atención por WhatsApp.</p>
+        <p>El formulario es una solicitud de información y presupuesto: <strong>no constituye por sí solo una reserva, una aceptación del precio ni una contratación</strong>. La información ingresada debe ser correcta y corresponder a la persona que realiza la consulta o contar con su autorización.</p>
+        <p>El uso de los datos se rige por la <a href="/politica-de-privacidad">Política de privacidad</a>. La opción de recibir novedades y promociones es voluntaria, puede dejarse sin marcar y puede revocarse en cualquier momento.</p>
+      </section>
+      <section><h2>5. ¿Cómo confirmar la fecha?</h2>
         <p>La fecha queda confirmada cuando:</p>
         <ol><li>Acordamos por escrito la fecha, el horario, el domicilio, los juegos, la duración y el precio final, incluido el traslado cuando corresponda.</li><li>Recibimos el <strong>pago completo</strong> y su comprobante antes de salir a instalar los juegos.</li><li>Inolvidable Kids confirma por escrito la recepción del pago y la disponibilidad de la fecha.</li></ol>
         <p>El precio final se abona en un solo pago antes de que salgamos a instalar los juegos. Aceptamos los medios de pago que indiquemos al cotizar, entre ellos transferencia bancaria, Mercado Pago, tarjetas y efectivo, según disponibilidad. Cualquier descuento o recargo aplicable se informará <strong>antes de confirmar el pago</strong>. Emitimos el comprobante fiscal correspondiente por el precio total acordado.</p>
       </section>
-      <section><h2>5. ¿Instalación y uso seguro?</h2>
+      <section><h2>6. ¿Instalación y uso seguro?</h2>
         <p>La persona contratante deberá facilitar el acceso al lugar y disponer de un espacio <strong>firme, nivelado y despejado</strong>, con las dimensiones necesarias para instalar los juegos. Cuando el equipo requiera electricidad, deberá haber un punto de conexión accesible y seguro.</p>
         <p>Nuestro equipo instalará y comprobará el funcionamiento de los juegos antes de habilitar su uso. Si el lugar presenta una condición que impida una instalación segura, acordaremos una solución posible antes de iniciar la actividad. Si no pudiera resolverse, evaluaremos con la familia una nueva fecha o la devolución que corresponda según las circunstancias.</p>
         <p>Durante el festejo, <strong>una persona adulta debe supervisar a los niños</strong> y respetar las indicaciones de uso, edad, capacidad y seguridad comunicadas al entregar los equipos. Ante lluvia, viento u otra situación que haga inseguro su uso, los juegos deberán dejar de utilizarse hasta que existan condiciones seguras.</p>
         <p>Estas indicaciones de cuidado <strong>no excluyen ni limitan</strong> las responsabilidades que legalmente correspondan a Inolvidable Kids por los equipos o por la prestación del servicio.</p>
       </section>
-      <section><h2>6. ¿Cambios y cancelaciones?</h2>
+      <section><h2>7. ¿Cambios y cancelaciones?</h2>
         <p>Si necesitás cambiar la fecha, escribinos lo antes posible. Buscaremos otra fecha disponible y te confirmaremos por escrito el cambio.</p>
         <p>Si preferís cancelar antes de que salgamos a instalar los juegos, <strong>te devolvemos el total que pagaste</strong>, aunque avises el día anterior o el mismo día. No aplicamos penalidades por esa cancelación.</p>
         <p>Si el niño o alguien de la familia se enferma, podés elegir entre reprogramar para una fecha disponible o recibir la <strong>devolución total</strong> antes del inicio del servicio. No necesitás comunicar diagnósticos ni otros datos médicos para solicitarlo.</p>
         <p>Podés pedir el cambio o la cancelación al correo <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=inolvidablekids%40gmail.com" target="_blank" rel="noopener noreferrer">inolvidablekids@gmail.com</a> o por nuestros canales de atención. También estarán disponibles los mecanismos de arrepentimiento y baja indicados en el sitio.</p>
       </section>
-      <section><h2>7. ¿Qué pasa si llueve?</h2>
+      <section><h2>8. ¿Qué pasa si llueve?</h2>
         <p>Si la lluvia o las condiciones climáticas impiden instalar o utilizar los juegos de manera segura, ofreceremos una <strong>reprogramación sin costo</strong> en una fecha que acordemos con la familia, sujeta a disponibilidad.</p>
         <p>Si la familia no desea reprogramar, o no conseguimos una fecha que ambas partes acepten, <strong>devolveremos el total abonado</strong> por el servicio que no se prestó.</p>
       </section>
-      <section><h2>8. ¿Y si no podemos cumplir?</h2>
+      <section><h2>9. ¿Y si no podemos cumplir?</h2>
         <p>Si por una causa atribuible a Inolvidable Kids no podemos cumplir el servicio confirmado, avisaremos tan pronto como sea posible. La familia podrá elegir entre una nueva fecha disponible o la <strong>devolución total de lo abonado</strong>, sin perjuicio de los demás derechos que le correspondan por ley.</p>
       </section>
-      <section><h2>9. ¿Derecho de arrepentimiento?</h2>
-        <p>Cuando la contratación se realice a distancia, la persona consumidora podrá ejercer el <strong>derecho legal de revocar la aceptación dentro del plazo aplicable</strong>, sin penalidad, en los términos de la legislación argentina. La opción de cancelar con devolución prevista en la sección 6 <strong>no limita ese derecho</strong>.</p>
+      <section><h2>10. ¿Derecho de arrepentimiento?</h2>
+        <p>Cuando la contratación se realice a distancia, la persona consumidora podrá ejercer el <strong>derecho legal de revocar la aceptación dentro del plazo aplicable</strong>, sin penalidad, en los términos de la legislación argentina. La opción de cancelar con devolución prevista en la sección 7 <strong>no limita ese derecho</strong>.</p>
         <p>El sitio ofrecerá un acceso visible denominado <a href="/arrepentimiento">“Botón de arrepentimiento”</a>, mediante el cual podrá enviarse la solicitud sin crear una cuenta. También se podrá contactar a Inolvidable Kids por el mismo medio utilizado para contratar.</p>
         <p>Responderemos la solicitud e informaremos su número de identificación dentro del plazo legal. Si corresponde la revocación, gestionaremos la devolución de lo abonado conforme a la normativa vigente.</p>
       </section>
-      <section><h2>10. ¿Cómo pedir baja o reclamar?</h2>
-        <p>El sitio ofrecerá además un acceso denominado <a href="/baja-de-servicio">“Botón de baja de servicio”</a> para solicitar la rescisión de una contratación. La recepción del pedido y su número de identificación se comunicarán por el mismo medio dentro del plazo legal. La baja, la cancelación comercial y el ejercicio del derecho de arrepentimiento se analizarán según la naturaleza y el momento de cada solicitud.</p>
+      <section><h2>11. ¿Cómo pedir baja o reclamar?</h2>
+        <p>El sitio ofrece un acceso denominado <a href="/baja-de-servicio">“Botón de baja de servicio”</a> para solicitar la rescisión de una contratación realizada a distancia, sin necesidad de crear una cuenta ni completar trámites adicionales. Al enviar el pedido se informa un código de seguimiento. También podés pedir la baja por el mismo medio electrónico utilizado para contratar.</p>
+        <p>La baja de una contratación es diferente de dejar de recibir promociones o pedir la eliminación de datos personales. Para darte de baja de promociones, respondé <strong>“BAJA”</strong> al mensaje recibido o escribí al correo indicado abajo. Para acceder, corregir o eliminar datos, seguí el procedimiento de la <a href="/politica-de-privacidad">Política de privacidad</a>.</p>
         <p>Para cualquier consulta o reclamo, escribí a <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=inolvidablekids%40gmail.com" target="_blank" rel="noopener noreferrer">inolvidablekids@gmail.com</a>. No es necesario renunciar a ningún derecho legal para usar nuestros canales de atención.</p>
       </section>
-      <section><h2>11. ¿Cuándo rigen los términos?</h2>
+      <section><h2>12. ¿Cuándo rigen los términos?</h2>
         <p>Estas condiciones estarán disponibles para su lectura antes de contratar. Las características y el precio final acordados para cada reserva se confirmarán por escrito y prevalecerán respecto de información general que pudiera quedar desactualizada en la página.</p>
         <p>Los cambios futuros de estos términos no modificarán retroactivamente una reserva ya confirmada sin acuerdo de la persona contratante. En todos los casos se aplicarán las normas argentinas de defensa del consumidor.</p>
       </section>

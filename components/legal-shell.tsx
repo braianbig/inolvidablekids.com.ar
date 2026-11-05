@@ -9,7 +9,7 @@ const links = [
 
 export function LegalShell({ title, intro, children, className = "", hideBackLink = false }: {
   title: string;
-  intro: string;
+  intro?: string;
   children: ReactNode;
   className?: string;
   hideBackLink?: boolean;
@@ -26,7 +26,7 @@ export function LegalShell({ title, intro, children, className = "", hideBackLin
       <section className="legal-hero">
         <div className="legal-hero-inner">
           <h1>{title}</h1>
-          <p>{intro}</p>
+          {intro && <p>{intro}</p>}
         </div>
       </section>
       <div className="legal-content">{children}</div>

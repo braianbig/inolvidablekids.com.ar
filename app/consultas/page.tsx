@@ -8,7 +8,14 @@ export const metadata: Metadata = {
 
 export default function ConsultasPage() {
   return (
-    <main>
+    <main className="consultas-page">
+      <header className="consultas-brand-header">
+        <a className="brand consultas-brand" href="/#inicio" aria-label="Inolvidable Kids, volver al inicio">
+          <img src="/inolvidable-icon.png" alt="" className="brand-icon" />
+          <span className="brand-name">Inolvidable</span>
+          <span className="brand-kids">KIDS</span>
+        </a>
+      </header>
       <ConsultationForm standalone />
     </main>
   );

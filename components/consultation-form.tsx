@@ -338,7 +338,7 @@ export function ConsultationForm({ standalone = false }: { standalone?: boolean 
         </section>
 
         <div className={`consultation-consent${consentError ? " invalid" : ""}`}>
-          <p>Usaremos tus datos para registrar y responder esta consulta, según nuestra <a href="/politica-de-privacidad" target="_blank" rel="noopener noreferrer">política de privacidad</a>.</p>
+          <p>Usaremos tus datos para registrar y responder esta consulta, según nuestra política de privacidad.</p>
           <label><input id="marketing-consent" type="checkbox" checked={marketingConsent} aria-invalid={consentError} onChange={event => { setMarketingConsent(event.target.checked); if (event.target.checked) setConsentError(false); }} /><span>Quiero recibir novedades y promociones de Inolvidable Kids. Luego podés darte de baja.</span></label>
         </div>
         {submitError && <p className="consultation-error" role="alert">{submitError} <a href={PLAIN_WHATSAPP_URL} target="_blank" rel="noreferrer">Hablar por WhatsApp</a></p>}

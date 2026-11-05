@@ -42,7 +42,6 @@ export function ConsultationForm({ standalone = false }: { standalone?: boolean 
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [marketingConsent, setMarketingConsent] = useState(false);
-  const [consentError, setConsentError] = useState(false);
   const [website, setWebsite] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
@@ -222,11 +221,6 @@ export function ConsultationForm({ standalone = false }: { standalone?: boolean 
     event.preventDefault();
     if (submissionRef.current) return;
     setSubmitError("");
-    if (!marketingConsent) {
-      setConsentError(true);
-      document.getElementById("marketing-consent")?.focus();
-      return;
-    }
     if (!selectedLocation) {
       setSubmitError("Marcá la ubicación exacta del evento antes de enviar.");
       document.getElementById("mapa-evento")?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -337,11 +331,12 @@ export function ConsultationForm({ standalone = false }: { standalone?: boolean 
           </div>
         </section>
 
-        <div className={`consultation-consent ${consentError ? "invalid" : ""}`}>
-          <label><input id="marketing-consent" type="checkbox" required checked={marketingConsent} aria-invalid={consentError} onInvalid={event => { event.preventDefault(); setConsentError(true); }} onChange={event => { setMarketingConsent(event.target.checked); if (event.target.checked) setConsentError(false); }} /><span>Acepto que quiero recibir novedades y promociones de Inolvidable Kids.</span></label>
+        <div className="consultation-consent">
+          <p>Usaremos tus datos para registrar y responder esta consulta, según nuestra <a href="/politica-de-privacidad" target="_blank" rel="noopener noreferrer">Política de privacidad</a>.</p>
+          <label><input id="marketing-consent" type="checkbox" checked={marketingConsent} onChange={event => setMarketingConsent(event.target.checked)} /><span>Quiero recibir novedades y promociones de Inolvidable Kids. Esta opción es voluntaria y puedo darme de baja cuando quiera.</span></label>
         </div>
         {submitError && <p className="consultation-error" role="alert">{submitError} <a href={PLAIN_WHATSAPP_URL} target="_blank" rel="noreferrer">Hablar por WhatsApp</a></p>}
-        {savedCode ? <a className="consultation-saved" href={`/solicitud-enviada?codigo=${encodeURIComponent(savedCode)}`}>Tu consulta {savedCode} se guardó. Ver confirmación →</a> : <Button type="submit" size="lg" disabled={isSubmitting} className="whatsapp-main" onClick={event => { if (!marketingConsent) { event.preventDefault(); setConsentError(true); } }}>{isSubmitting ? "Guardando tu consulta…" : "Enviar consulta"}</Button>}
+        {savedCode ? <a className="consultation-saved" href={`/solicitud-enviada?codigo=${encodeURIComponent(savedCode)}`}>Tu consulta {savedCode} se guardó. Ver confirmación →</a> : <Button type="submit" size="lg" disabled={isSubmitting} className="whatsapp-main">{isSubmitting ? "Guardando tu consulta…" : "Enviar consulta"}</Button>}
       </form>
     </section>
   );

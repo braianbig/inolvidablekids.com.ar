@@ -339,7 +339,7 @@ export function ConsultationForm({ standalone = false }: { standalone?: boolean 
 
         <div className={`consultation-consent${consentError ? " invalid" : ""}`}>
           <p>Usaremos tus datos para registrar y responder esta consulta, según nuestra <a href="/politica-de-privacidad" target="_blank" rel="noopener noreferrer">política de privacidad</a>.</p>
-          <label><input id="marketing-consent" type="checkbox" checked={marketingConsent} aria-invalid={consentError} onChange={event => { setMarketingConsent(event.target.checked); if (event.target.checked) setConsentError(false); }} /><span>Quiero recibir novedades y promociones de Inolvidable Kids. Podés darte de baja.</span></label>
+          <label><input id="marketing-consent" type="checkbox" checked={marketingConsent} aria-invalid={consentError} onChange={event => { setMarketingConsent(event.target.checked); if (event.target.checked) setConsentError(false); }} /><span>Quiero recibir novedades y promociones de Inolvidable Kids. Luego podés darte de baja.</span></label>
         </div>
         {submitError && <p className="consultation-error" role="alert">{submitError} <a href={PLAIN_WHATSAPP_URL} target="_blank" rel="noreferrer">Hablar por WhatsApp</a></p>}
         {savedCode ? <a className="consultation-saved" href={`/solicitud-enviada?codigo=${encodeURIComponent(savedCode)}`}>Tu consulta {savedCode} se guardó. Ver confirmación →</a> : <Button type="submit" size="lg" disabled={isSubmitting} className="whatsapp-main" onClick={event => { if (!marketingConsent) { event.preventDefault(); setConsentError(true); document.getElementById("marketing-consent")?.focus(); } }}>{isSubmitting ? "Guardando tu consulta…" : "Enviar consulta"}</Button>}

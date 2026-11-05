@@ -41,9 +41,8 @@ export function ConsultationForm({ standalone = false }: { standalone?: boolean 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
-  const [privacyRead, setPrivacyRead] = useState(false);
-  const [privacyError, setPrivacyError] = useState(false);
   const [marketingConsent, setMarketingConsent] = useState(false);
+  const [consentError, setConsentError] = useState(false);
   const [website, setWebsite] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
@@ -223,6 +222,11 @@ export function ConsultationForm({ standalone = false }: { standalone?: boolean 
     event.preventDefault();
     if (submissionRef.current) return;
     setSubmitError("");
+    if (!marketingConsent) {
+      setConsentError(true);
+      document.getElementById("marketing-consent")?.focus();
+      return;
+    }
     if (!selectedLocation) {
       setSubmitError("Marcá la ubicación exacta del evento antes de enviar.");
       document.getElementById("mapa-evento")?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -333,11 +337,9 @@ export function ConsultationForm({ standalone = false }: { standalone?: boolean 
           </div>
         </section>
 
-        <div className={`consultation-consent${privacyError ? " invalid" : ""}`}>
-          <p>Usaremos tus datos para registrar y responder esta consulta, según nuestra <a href="/politica-de-privacidad" target="_blank" rel="noopener noreferrer">Política de privacidad</a>.</p>
-          <label><input type="checkbox" required checked={privacyRead} aria-invalid={privacyError} aria-describedby={privacyError ? "privacy-confirmation-error" : undefined} onInvalid={event => { event.preventDefault(); setPrivacyError(true); event.currentTarget.focus(); }} onChange={event => { setPrivacyRead(event.target.checked); if (event.target.checked) setPrivacyError(false); }} /><span>Leí el aviso de privacidad.</span></label>
-          {privacyError && <p id="privacy-confirmation-error" className="privacy-confirmation-error" role="alert">Marcá esta casilla para confirmar que leíste el aviso de privacidad.</p>}
-          <label><input id="marketing-consent" type="checkbox" checked={marketingConsent} onChange={event => setMarketingConsent(event.target.checked)} /><span>Quiero recibir novedades y promociones de Inolvidable Kids. Esta opción es voluntaria y puedo darme de baja cuando quiera.</span></label>
+        <div className={`consultation-consent${consentError ? " invalid" : ""}`}>
+          <p>Usaremos tus datos para registrar y responder esta consulta, según nuestra <a href="/politica-de-privacidad" target="_blank" rel="noopener noreferrer">política de privacidad</a>.</p>
+          <label><input id="marketing-consent" type="checkbox" checked={marketingConsent} aria-invalid={consentError} onChange={event => { setMarketingConsent(event.target.checked); if (event.target.checked) setConsentError(false); }} /><span>Quiero recibir novedades y promociones de Inolvidable Kids. Esta opción es voluntaria.</span></label>
         </div>
         {submitError && <p className="consultation-error" role="alert">{submitError} <a href={PLAIN_WHATSAPP_URL} target="_blank" rel="noreferrer">Hablar por WhatsApp</a></p>}
         {savedCode ? <a className="consultation-saved" href={`/solicitud-enviada?codigo=${encodeURIComponent(savedCode)}`}>Tu consulta {savedCode} se guardó. Ver confirmación →</a> : <Button type="submit" size="lg" disabled={isSubmitting} className="whatsapp-main">{isSubmitting ? "Guardando tu consulta…" : "Enviar consulta"}</Button>}

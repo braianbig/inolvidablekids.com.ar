@@ -140,10 +140,8 @@ h1, h2, h3, p { margin-top: 0; }
 .consultation-consent input:checked { border-color: #005a46; background: #005a46; }
 .consultation-consent input:checked::after { display: block; }
 .consultation-consent input:focus-visible { outline: 2px solid #005a46; outline-offset: 3px; }
-.consultation-consent.invalid { background: #fff5f3; box-shadow: inset 0 0 0 1px #e5a59b; }
+.consultation-consent.invalid { background: #fff5f3; color: #8a2a1d; box-shadow: inset 0 0 0 1px #b3392b; }
 .consultation-consent.invalid input[aria-invalid="true"] { border: 2px solid #b3392b; }
-.consultation-consent .privacy-confirmation-error { color: #8a2a1d; margin: 4px 0 0 31px; }
-.consultation-consent label:last-child { margin-top: 10px; }
 .gps-hint-short { display: none; }
 .consultation-pending { margin: 14px 0 0; color: #55746b; font-size: .82rem; line-height: 1.5; text-align: center; }
 .consultation-error { padding: 14px 18px; margin: 18px 0 0; border: 1px solid #ecc0b8; border-radius: 14px; background: #fff7f5; color: #8a2a1d; line-height: 1.6; }

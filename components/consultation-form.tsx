@@ -213,7 +213,7 @@ export function ConsultationForm({ standalone = false }: { standalone?: boolean 
     setGeoStatus("Buscando tu ubicación…");
     navigator.geolocation.getCurrentPosition(
       ({ coords }) => setMapPointRef.current?.(coords.latitude, coords.longitude, true),
-      () => setGeoStatus("No pudimos acceder al GPS. Permití la ubicación o marcá el lugar en el mapa."),
+      () => setGeoStatus("No pudimos acceder al GPS.\nPermití la ubicación o marcá el lugar en el mapa."),
       { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 },
     );
   };
@@ -333,7 +333,7 @@ export function ConsultationForm({ standalone = false }: { standalone?: boolean 
           <div ref={mapContainerRef} className="event-map" aria-label="Mapa para elegir la ubicación exacta del evento" />
           <div className={`location-status ${selectedLocation ? "selected" : ""}`} role="status">
             <span>{selectedLocation ? "✓" : "📍"}</span>
-            <div><strong>{selectedLocation ? "Ubicación lista" : "Ubicación obligatoria"}</strong><small>{geoStatus}</small></div>
+            <div><strong>{selectedLocation ? "Ubicación lista" : "Ubicación obligatoria"}</strong><small>{geoStatus.split("\n").map((line, index) => <Fragment key={index}>{index > 0 && <br />}{line}</Fragment>)}</small></div>
           </div>
         </section>
 

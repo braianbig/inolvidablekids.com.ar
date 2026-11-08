@@ -455,3 +455,12 @@ footer { padding: 60px max(5vw, 24px) 28px; background: linear-gradient(180deg, 
   .consultas-brand-header { padding-top: 18px; }
   .consultas-page .booking-section { padding-top: 18px; }
 }
+
+/* Focused form validation and homepage brand alignment. */
+.site-header .brand-icon { margin-right: 0; transform: translateY(-2px); }
+.consultation-form.validation-attempted input:invalid { background: #fff5f3; border-color: #b3392b; color: #8a2a1d; box-shadow: inset 0 0 0 1px #b3392b; }
+.location-status.invalid { background: #fff5f3; color: #8a2a1d; box-shadow: inset 0 0 0 1px #b3392b; }
+.location-status.invalid strong { color: #8a2a1d; }
+.location-status.invalid > span { background: #f9dcd6; }
+.final-cta .final-smile { width: 112px; height: 112px; }
+@media (max-width:700px) { .final-cta .final-smile { width:86px; height:86px; } }

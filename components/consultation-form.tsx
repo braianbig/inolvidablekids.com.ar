@@ -42,6 +42,8 @@ export function ConsultationForm({ standalone = false }: { standalone?: boolean 
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [marketingConsent, setMarketingConsent] = useState(false);
+  const [attempted, setAttempted] = useState(false);
+  const [locationError, setLocationError] = useState(false);
   const [consentError, setConsentError] = useState(false);
   const [website, setWebsite] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -222,6 +224,20 @@ export function ConsultationForm({ standalone = false }: { standalone?: boolean 
     event.preventDefault();
     if (submissionRef.current) return;
     setSubmitError("");
+    setAttempted(true);
+    setConsentError(!marketingConsent);
+    setLocationError(!selectedLocation);
+    const form = event.currentTarget;
+    const invalid = form.querySelector<HTMLInputElement>("input:invalid");
+    if (invalid) {
+      invalid.scrollIntoView({ behavior: "smooth", block: "center" });
+      invalid.focus({ preventScroll: true });
+      return;
+    }
+    if (!selectedLocation) {
+      document.getElementById("mapa-evento")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
     if (!marketingConsent) {
       setConsentError(true);
       document.getElementById("marketing-consent")?.focus();
@@ -273,7 +289,7 @@ export function ConsultationForm({ standalone = false }: { standalone?: boolean 
 
   return (
     <section className="booking-section" id="combos">
-      <form className="booking-card consultation-form" onSubmit={submitConsultation} aria-busy={isSubmitting}>
+      <form className={`booking-card consultation-form${attempted ? " validation-attempted" : ""}`} noValidate onSubmit={submitConsultation} aria-busy={isSubmitting}>
         <div className="booking-heading">
           <div><Heading>¡Armá tu diversión!</Heading><p>Elegí juegos, fecha y duración a tu gusto.</p></div>
         </div>
@@ -331,9 +347,9 @@ export function ConsultationForm({ standalone = false }: { standalone?: boolean 
             <button type="button" className="gps-button" onClick={useCurrentLocation}>📍 Usar mi ubicación actual (GPS)</button>
           </div>
           <div ref={mapContainerRef} className="event-map" aria-label="Mapa para elegir la ubicación exacta del evento" />
-          <div className={`location-status ${selectedLocation ? "selected" : ""}`} role="status">
+          <div className={`location-status ${selectedLocation ? "selected" : locationError ? "invalid" : ""}`} role="status">
             <span>{selectedLocation ? "✓" : "📍"}</span>
-            <div><strong>{selectedLocation ? "Ubicación lista" : "Ubicación obligatoria"}</strong><small>{geoStatus.split("\n").map((line, index) => <Fragment key={index}>{index > 0 && <br />}{line}</Fragment>)}</small></div>
+            <div><strong>{selectedLocation ? "Ubicación lista" : locationError ? "Falta la ubicación" : "Ubicación obligatoria"}</strong><small>{(locationError && !selectedLocation ? "Necesitamos conocer la ubicación del cumpleaños" : geoStatus).split("\n").map((line, index) => <Fragment key={index}>{index > 0 && <br />}{line}</Fragment>)}</small></div>
           </div>
         </section>
 
@@ -342,7 +358,7 @@ export function ConsultationForm({ standalone = false }: { standalone?: boolean 
           <label><input id="marketing-consent" type="checkbox" checked={marketingConsent} aria-invalid={consentError} onChange={event => { setMarketingConsent(event.target.checked); if (event.target.checked) setConsentError(false); }} /><span>Quiero recibir novedades y promociones de Inolvidable Kids. Luego podés darte de baja.</span></label>
         </div>
         {submitError && <p className="consultation-error" role="alert">{submitError} <a href={PLAIN_WHATSAPP_URL} target="_blank" rel="noreferrer">Hablar por WhatsApp</a></p>}
-        {savedCode ? <a className="consultation-saved" href={`/solicitud-enviada?codigo=${encodeURIComponent(savedCode)}`}>Tu consulta {savedCode} se guardó. Ver confirmación →</a> : <Button type="submit" size="lg" disabled={isSubmitting} className="whatsapp-main" onClick={event => { if (!marketingConsent) { event.preventDefault(); setConsentError(true); document.getElementById("marketing-consent")?.focus(); } }}>{isSubmitting ? "Guardando tu consulta…" : "Enviar consulta"}</Button>}
+        {savedCode ? <a className="consultation-saved" href={`/solicitud-enviada?codigo=${encodeURIComponent(savedCode)}`}>Tu consulta {savedCode} se guardó. Ver confirmación →</a> : <Button type="submit" size="lg" disabled={isSubmitting} className="whatsapp-main">{isSubmitting ? "Guardando tu consulta…" : "Enviar consulta"}</Button>}
       </form>
     </section>
   );

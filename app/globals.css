@@ -469,3 +469,12 @@ footer { padding: 60px max(5vw, 24px) 28px; background: linear-gradient(180deg, 
 .site-header .brand-name, .site-header .brand-kids,
 .consultas-brand .brand-name, .consultas-brand .brand-kids { transform: translateY(1px); }
 .consultas-brand .brand-icon { margin-right: 0; transform: translateY(-2px); }
+
+/* Keep the empty date hint as quiet as the contact placeholders. */
+.consultation-form input[type="date"]:required:invalid { font-weight: 400; color: #8b9490; }
+.consultation-form input[type="date"]:required:invalid::-webkit-datetime-edit,
+.consultation-form input[type="date"]:required:invalid::-webkit-datetime-edit-fields-wrapper,
+.consultation-form input[type="date"]:required:invalid::-webkit-datetime-edit-day-field,
+.consultation-form input[type="date"]:required:invalid::-webkit-datetime-edit-month-field,
+.consultation-form input[type="date"]:required:invalid::-webkit-datetime-edit-year-field,
+.consultation-form input[type="date"]:required:invalid::-webkit-datetime-edit-text { font-weight: 400; color: #8b9490; }

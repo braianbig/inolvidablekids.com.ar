@@ -458,7 +458,7 @@ footer { padding: 60px max(5vw, 24px) 28px; background: linear-gradient(180deg, 
 
 /* Focused form validation and homepage brand alignment. */
 .site-header .brand-icon { margin-right: 0; transform: translateY(-2px); }
-.consultation-form.validation-attempted input:invalid { background: #fff5f3; border-color: #b3392b; color: #8a2a1d; box-shadow: inset 0 0 0 1px #b3392b; }
+.consultation-form.validation-attempted input:invalid { background: #fff5f3; border: 1px solid #b3392b; color: #8a2a1d; box-shadow: none; }
 .location-status.invalid { background: #fff5f3; color: #8a2a1d; box-shadow: inset 0 0 0 1px #b3392b; }
 .location-status.invalid strong { color: #8a2a1d; }
 .location-status.invalid > span { background: #f9dcd6; }

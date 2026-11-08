@@ -349,7 +349,7 @@ export function ConsultationForm({ standalone = false }: { standalone?: boolean 
           <div ref={mapContainerRef} className="event-map" aria-label="Mapa para elegir la ubicación exacta del evento" />
           <div className={`location-status ${selectedLocation ? "selected" : locationError ? "invalid" : ""}`} role="status">
             <span>{selectedLocation ? "✓" : "📍"}</span>
-            <div><strong>{selectedLocation ? "Ubicación lista" : locationError ? "Falta la ubicación" : "Ubicación obligatoria"}</strong><small>{(locationError && !selectedLocation ? "Necesitamos conocer la ubicación del cumpleaños" : geoStatus).split("\n").map((line, index) => <Fragment key={index}>{index > 0 && <br />}{line}</Fragment>)}</small></div>
+            <div><strong>{selectedLocation ? "Ubicación lista" : locationError ? "Falta la ubicación" : "Ubicación obligatoria"}</strong><small>{(locationError && !selectedLocation ? "Necesitamos conocer la ubicación del cumpleaños." : geoStatus).split("\n").map((line, index) => <Fragment key={index}>{index > 0 && <br />}{line}</Fragment>)}</small></div>
           </div>
         </section>
 

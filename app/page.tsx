@@ -142,11 +142,12 @@ export default function Home() {
       </section>
 
       <section className="final-cta">
-        <svg className="final-smile" viewBox="0 0 112 112" aria-hidden="true">
-          <defs><filter id="smile-without-circle" colorInterpolationFilters="sRGB">
-            <feColorMatrix type="matrix" values="0 0 0 0 0.663  0 0 0 0 0.824  0 0 0 0 0.325  4 0 0 0 -0.5" />
-          </filter></defs>
-          <image href="/inolvidable-icon.png" width="112" height="112" filter="url(#smile-without-circle)" />
+        <svg className="final-smile" viewBox="0 0 112 112" fill="none" aria-hidden="true">
+          <g stroke="#a9d253" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M24 49c1-11 15-11 17 0M59 49c1-11 15-11 17 0" />
+            <path d="M20 68c16 28 48 28 65 0" />
+          </g>
+          <path d="M89 7c2 14 5 18 18 21-13 3-16 7-18 21-3-14-6-18-19-21C83 25 86 21 89 7Z" fill="#a9d253" />
         </svg>
         <div><span className="section-kicker light">¿Ya tenés la fecha?</span><h2>Hagamos que sea inolvidable.</h2><p>Elegí tu combo y consultanos la disponibilidad por WhatsApp.</p></div>
         <Button asChild size="lg" className="final-button sparkle-action"><a href="#combos"><SparkleButtonLabel>¡Elegir un combo!</SparkleButtonLabel></a></Button>

@@ -464,3 +464,8 @@ footer { padding: 60px max(5vw, 24px) 28px; background: linear-gradient(180deg, 
 .location-status.invalid > span { background: #f9dcd6; }
 .final-cta .final-smile { width: 112px; height: 112px; }
 @media (max-width:700px) { .final-cta .final-smile { width:86px; height:86px; } }
+
+/* Match the homepage and consultations brand lockups. */
+.site-header .brand-name, .site-header .brand-kids,
+.consultas-brand .brand-name, .consultas-brand .brand-kids { transform: translateY(1px); }
+.consultas-brand .brand-icon { margin-right: 0; transform: translateY(-2px); }
